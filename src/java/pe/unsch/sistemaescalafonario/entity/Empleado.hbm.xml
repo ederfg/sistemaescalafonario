@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 21-mar-2018 18:08:41 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="pe.unsch.sistemaescalafonario.entity.Empleado" optimistic-lock="version" schema="public" table="empleado">
+        <id name="id" type="int">
+            <column name="id"/>
+            <generator class="sequence">
+                <param name="sequence">empleado_id_seq</param>
+            </generator>  
+        </id>
+        <many-to-one class="pe.unsch.sistemaescalafonario.entity.Distrito" fetch="select" name="distrito" lazy="false">
+            <column name="iddistrito" not-null="true"/>
+        </many-to-one>
+        <property name="dni" type="string">
+            <column length="8" name="dni" not-null="true"/>
+        </property>
+        <property name="apellidopaterno" type="string">
+            <column length="20" name="apellidopaterno" not-null="true"/>
+        </property>
+        <property name="apellidomaterno" type="string">
+            <column length="20" name="apellidomaterno" not-null="true"/>
+        </property>
+        <property name="nombres" type="string">
+            <column length="30" name="nombres" not-null="true"/>
+        </property>
+        <property name="fechanacimiento" type="date">
+            <column length="13" name="fechanacimiento" not-null="true"/>
+        </property>
+        <property name="sexo" type="string">
+            <column length="10" name="sexo" not-null="true"/>
+        </property>
+        <property name="estadocivil" type="string">
+            <column length="10" name="estadocivil"/>
+        </property>
+        <property name="direccion" type="string">
+            <column length="80" name="direccion"/>
+        </property>
+        <property name="celular" type="string">
+            <column length="9" name="celular"/>
+        </property>
+        <property name="correoelectronico" type="string">
+            <column length="50" name="correoelectronico"/>
+        </property>
+        <property name="gruposanguineo" type="string">
+            <column length="3" name="gruposanguineo"/>
+        </property>
+        <property name="sistemapensionario" type="string">
+            <column length="30" name="sistemapensionario"/>
+        </property>
+        <property name="ruc" type="string">
+            <column length="11" name="ruc"/>
+        </property>
+        <property name="mayoringreso" type="java.lang.Boolean">
+            <column name="mayoringreso"/>
+        </property>
+        <property name="afiliacionsindicato" type="java.lang.Boolean">
+            <column name="afiliacionsindicato"/>
+        </property>
+    </class>
+</hibernate-mapping>

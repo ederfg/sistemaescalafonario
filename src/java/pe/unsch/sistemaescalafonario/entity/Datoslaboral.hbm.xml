@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 21-mar-2018 18:08:41 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+  <class name="pe.unsch.sistemaescalafonario.entity.Datoslaboral" optimistic-lock="version" schema="public" table="datoslaboral">
+    <id name="id" type="int">
+      <column name="id"/>
+      <generator class="sequence">
+        <param name="sequence">datoslaboral_id_seq</param>
+      </generator>  
+    </id>
+    <many-to-one class="pe.unsch.sistemaescalafonario.entity.Empleado" fetch="select" name="empleado" lazy="false">
+      <column name="idempleado" not-null="true"/>
+    </many-to-one>
+    <property name="fechaingresoinst" type="date">
+      <column length="13" name="fechaingresoinst" not-null="true"/>
+    </property>
+    <property name="condicionlaboral" type="string">
+      <column length="12" name="condicionlaboral" not-null="true"/>
+    </property>
+    <property name="tipocontrato" type="string">
+      <column length="15" name="tipocontrato"/>
+    </property>
+    <property name="puesto" type="string">
+      <column length="15" name="puesto"/>
+    </property>
+    <property name="facultad" type="string">
+      <column length="50" name="facultad"/>
+    </property>
+    <property name="ingmensualbruto" type="big_decimal">
+      <column name="ingmensualbruto" precision="131089" scale="0"/>
+    </property>
+    <property name="cese" type="string">
+      <column length="12" name="cese"/>
+    </property>
+    <property name="fechacese" type="date">
+      <column length="13" name="fechacese"/>
+    </property>
+  </class>
+</hibernate-mapping>

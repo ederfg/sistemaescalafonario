@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 21-mar-2018 18:08:41 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+  <class name="pe.unsch.sistemaescalafonario.entity.Datoshijos" optimistic-lock="version" schema="public" table="datoshijos">
+    <id name="id" type="int">
+      <column name="id"/>
+      <generator class="sequence">
+        <param name="sequence">datoshijos_id_seq</param>
+      </generator>  
+    </id>
+    <many-to-one class="pe.unsch.sistemaescalafonario.entity.Datosfamilia" fetch="select" name="datosfamilia" lazy="false">
+      <column name="iddatosfamilia" not-null="true"/>
+    </many-to-one>
+    <property name="dnihijo" type="string">
+      <column length="8" name="dnihijo" not-null="true"/>
+    </property>
+    <property name="appathijo" type="string">
+      <column length="20" name="appathijo" not-null="true"/>
+    </property>
+    <property name="apmathijo" type="string">
+      <column length="20" name="apmathijo" not-null="true"/>
+    </property>
+    <property name="nombreshijo" type="string">
+      <column length="30" name="nombreshijo" not-null="true"/>
+    </property>
+    <property name="fechanachijo" type="date">
+      <column length="13" name="fechanachijo" not-null="true"/>
+    </property>
+    <property name="sexo" type="string">
+      <column length="10" name="sexo"/>
+    </property>
+  </class>
+</hibernate-mapping>

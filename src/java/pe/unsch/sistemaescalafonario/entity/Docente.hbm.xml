@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 21-mar-2018 18:08:41 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+  <class name="pe.unsch.sistemaescalafonario.entity.Docente" optimistic-lock="version" schema="public" table="docente">
+    <id name="id" type="int">
+      <column name="id"/>
+      <generator class="sequence">
+        <param name="sequence">docente_id_seq</param>
+      </generator>
+    </id>
+    <many-to-one class="pe.unsch.sistemaescalafonario.entity.Empleado" fetch="select" name="empleado" lazy="false">
+      <column name="idempleado" not-null="true"/>
+    </many-to-one>
+    <property name="codigodocente" type="int">
+      <column name="codigodocente" not-null="true"/>
+    </property>
+    <property name="categoriadocente" type="string">
+      <column length="15" name="categoriadocente"/>
+    </property>
+    <property name="regimendedicacion" type="string">
+      <column length="15" name="regimendedicacion"/>
+    </property>
+    <property name="nivelremunerativodoc" type="string">
+      <column length="5" name="nivelremunerativodoc"/>
+    </property>
+  </class>
+</hibernate-mapping>

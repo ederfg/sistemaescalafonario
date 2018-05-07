@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 21-mar-2018 18:08:41 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+  <class name="pe.unsch.sistemaescalafonario.entity.Datosacademicos" optimistic-lock="version" schema="public" table="datosacademicos">
+    <id name="id" type="int">
+      <column name="id"/>
+      <generator class="sequence">
+        <param name="sequence">datosacademicos_id_seq</param>
+      </generator>  
+    </id>
+    <many-to-one class="pe.unsch.sistemaescalafonario.entity.Empleado" fetch="select" name="empleado" lazy="false">
+      <column name="idempleado" not-null="true"/>
+    </many-to-one>
+    <property name="gradoinstruccion" type="string">
+      <column length="30" name="gradoinstruccion" not-null="true"/>
+    </property>
+    <property name="nombreinstitucion" type="string">
+      <column length="100" name="nombreinstitucion" not-null="true"/>
+    </property>
+    <property name="condicion" type="string">
+      <column length="20" name="condicion" not-null="true"/>
+    </property>
+    <property name="anioegreso" type="java.lang.Integer">
+      <column name="anioegreso"/>
+    </property>
+    <property name="especialidad" type="string">
+      <column length="30" name="especialidad"/>
+    </property>
+  </class>
+</hibernate-mapping>

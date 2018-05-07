@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 21-mar-2018 18:08:41 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="pe.unsch.sistemaescalafonario.entity.Provincia" optimistic-lock="version" schema="public" table="provincia">
+        <id name="id" type="int">
+            <column name="id"/>
+            <generator class="sequence">
+                <param name="sequence">provincia_id_seq</param>
+            </generator>
+        </id>
+        <many-to-one class="pe.unsch.sistemaescalafonario.entity.Departamento" fetch="select" name="departamento" lazy="false">
+            <column name="iddepartamento" not-null="true"/>
+        </many-to-one>
+        <property name="nombreprovincia" type="string">
+            <column length="50" name="nombreprovincia" not-null="true"/>
+        </property>
+    </class>
+</hibernate-mapping>
