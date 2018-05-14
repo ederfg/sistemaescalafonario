@@ -5,7 +5,9 @@
  */
 package pe.unsch.sistemaescalafonario.service.impl;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pe.unsch.sistemaescalafonario.dao.AdministrativoDao;
 import pe.unsch.sistemaescalafonario.entity.Administrativo;
 import pe.unsch.sistemaescalafonario.service.AdministrativoService;
 
@@ -15,5 +17,13 @@ import pe.unsch.sistemaescalafonario.service.AdministrativoService;
  */
 @Service
 public class AdministrativoServiceImpl extends GenericServiceImpl<Administrativo> implements AdministrativoService{
+
+    @Autowired
+    AdministrativoDao administrativoDao;
+    
+    @Override
+    public Administrativo obtenerDatosAdministrativoPorIdEmpleado(int idempleado) {
+        return (Administrativo) administrativoDao.consultUnique("from Administrativo a where a.empleado.id="+idempleado);
+    }
     
 }

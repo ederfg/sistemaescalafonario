@@ -105,7 +105,7 @@
                         controller: 'administrativoregistroCtrl'
                     })
                     
-                    .when('/administrativo/mantenimiento/modificaradministrativo', {
+                    .when('/administrativo/mantenimiento/modificaradministrativo/:idempleado', {
                         templateUrl: '/sistemaescalafonario/administrativo/mantenimientoadministrativo/modificar',
                         controller: 'administrativomodificarCtrl'
                     })
@@ -149,8 +149,6 @@
                         templateUrl: '/sistemaescalafonario/administrativo/addendasadministrativo',
                         controller: 'administrativoaddendasCtrl'
                     })
-                    
-                   
                     
                     .otherwise({
                         redirectTo: '/'

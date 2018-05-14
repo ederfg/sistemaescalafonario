@@ -164,7 +164,69 @@ appPersonal.factory('AdministrativoServ', ['$http', '$q', function ($http, $q) {
                             d.resolve();
                         });
                 return d.promise;
+            },
+
+            //OBTENER DATOS DEL ADMINSITRATIVO
+            obtenerDatosPersonales: function (idempleado) {
+                var d = $q.defer();
+                $http.get('/sistemaescalafonario/administrativo/obtenerdatospersonales/?idempleado='+idempleado)
+                        .success(function (respuesta) {
+                            console.log(respuesta);
+                            //self.empleados = respuesta;
+                            d.resolve(respuesta);
+                        });
+                return d.promise;    
+            },
+            actualizarDatosPersonales: function (empleado) {
+                var d = $q.defer();
+                $http.post('/sistemaescalafonario/administrativo/actualizardatospersonales',empleado)
+                        .success(function (respuesta) {
+                            console.log(respuesta);
+                            //self.empleados = respuesta;
+                            d.resolve(respuesta);
+                        });
+                return d.promise;    
+            },
+            obtenerDatosAdministrativo: function (idempleado) {
+                var d = $q.defer();
+                $http.get('/sistemaescalafonario/administrativo/obtenerdatosadministrativo/?idempleado='+idempleado)
+                        .success(function (respuesta) {
+                            console.log(respuesta);
+                            //self.empleados = respuesta;
+                            d.resolve(respuesta);
+                        });
+                return d.promise;    
+            },
+            actualizarDatosAdministrativo: function (administrativo) {
+                var d = $q.defer();
+                $http.post('/sistemaescalafonario/administrativo/actualizardatosadministrativo',administrativo)
+                        .success(function (respuesta) {
+                            console.log(respuesta);
+                            //self.empleados = respuesta;
+                            d.resolve(respuesta);
+                        });
+                return d.promise;    
+            },
+            obtenerDatosLaboral: function (idempleado) {
+                var d = $q.defer();
+                $http.get('/sistemaescalafonario/administrativo/obtenerdatoslaboral/?idempleado='+idempleado)
+                        .success(function (respuesta) {
+                            console.log(respuesta);
+                            //self.empleados = respuesta;
+                            d.resolve(respuesta);
+                        });
+                return d.promise;    
+            },
+            actualizarDatosLaboral: function (datoslaboral) {
+                var d = $q.defer();
+                $http.post('/sistemaescalafonario/administrativo/actualizardatoslaboral',datoslaboral)
+                        .success(function (respuesta) {
+                            console.log(respuesta);
+                            d.resolve(respuesta);
+                        });
+                return d.promise;    
             }
+            
 
 
 

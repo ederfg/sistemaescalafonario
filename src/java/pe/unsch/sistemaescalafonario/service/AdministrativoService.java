@@ -14,4 +14,5 @@ import pe.unsch.sistemaescalafonario.entity.Administrativo;
  */
 public interface AdministrativoService extends GenericService<Administrativo>{
     
+    Administrativo obtenerDatosAdministrativoPorIdEmpleado (int idempleado);
 }

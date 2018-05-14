@@ -11,6 +11,7 @@ import pe.unsch.sistemaescalafonario.entity.Datoslaboral;
  *
  * @author José
  */
-public interface DatoslaboralService extends GenericService<Datoslaboral>{
-    
+public interface DatoslaboralService extends GenericService<Datoslaboral> {
+
+    Datoslaboral obtenerDatosLaboralPorIdEmpleado(int idempleado);
 }

@@ -31,4 +31,14 @@ public abstract class GenericServiceImpl<T> implements GenericService<T>{
     public int guardar(T t) {
         return genericDao.save(t);
     }
+
+    @Override
+    public T get(int id) {
+        return genericDao.get(id);
+    }
+
+    @Override
+    public int update(T t) {
+        return genericDao.update(t);
+    }
 }

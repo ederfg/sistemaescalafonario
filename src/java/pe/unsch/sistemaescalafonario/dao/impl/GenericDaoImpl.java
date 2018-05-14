@@ -13,6 +13,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 import pe.unsch.sistemaescalafonario.dao.GenericDao;
 import pe.unsch.sistemaescalafonario.util.HibernateUtil;
@@ -83,6 +84,55 @@ public abstract class GenericDaoImpl<T> implements GenericDao<T> {
             sesion.close();
         }
         return r;
+    }
+
+    @Override
+    public T get(int id) {
+        Session sesion = sesionFactory.openSession();
+        sesion.beginTransaction().commit();
+
+        Criteria criteria = sesion.createCriteria(type);
+        T x = (T) criteria.add(Restrictions.eq("id", id)).uniqueResult();
+
+        sesion.close();
+        return x;
+    }
+
+    @Override
+    public int update(T x) {
+        Session sesion = sesionFactory.openSession();
+        Transaction tx = sesion.beginTransaction();
+
+        //Variable de respuesta
+        int r = 0;
+
+        try {
+            sesion.clear();
+            sesion.update(x);
+            tx.commit();
+            r++;
+        } catch (Exception e) {
+            System.out.println("" + e.getMessage());
+            tx.rollback();
+        } finally {
+            sesion.close();
+        }
+        return r;
+    }
+
+    @Override
+    public Object consultUnique(String consulta) {
+        Session sesion = sesionFactory.openSession();
+        sesion.clear();
+        sesion.beginTransaction().commit();
+
+        Query query = sesion.createQuery(consulta);
+        Object objeto = query.uniqueResult();
+
+        //sesion.flush();
+        sesion.close();
+
+        return objeto;
     }
 
 }

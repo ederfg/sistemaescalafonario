@@ -80,7 +80,7 @@
                     <td>Tiempo Completo</td>
                     <td>FCEAC</td>
                     <td>{{administrativo.empleado.sexo}}</td>
-                    <td><a href="#/administrativo/mantenimiento/modificaradministrativo" class="btn btn-success">Modificar</a></td>
+                    <td><a href="#/administrativo/mantenimiento/modificaradministrativo/{{administrativo.empleado.id}}" class="btn btn-success">Modificar</a></td>
                     <td>
                         <!-- Button trigger modal -->
                         <button id="agregar" type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModal">

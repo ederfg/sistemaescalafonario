@@ -19,6 +19,12 @@ public interface GenericDao<T> {
     
     List<T> consultList(String consult);
     
+    Object consultUnique(String consulta);
+    
     int save(T t);
+    
+    T get (int id);
+    
+    int update(T t);
 
 }

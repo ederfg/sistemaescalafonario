@@ -17,5 +17,10 @@ public interface GenericService<T> {
     List<T> listarTodo();
     
     int guardar(T t);
+    
+    T get(int id);
+    
+    int update(T t);
+    
 }
 
