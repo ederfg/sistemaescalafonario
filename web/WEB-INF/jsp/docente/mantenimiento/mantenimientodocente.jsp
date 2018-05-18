@@ -26,28 +26,13 @@
             <div class="col-md-6">
                 <form class="form-inline">
                     <div class="form-group mb-2">
-                        <label for="staticEmail2" class="sr-only">DNI</label>
-                        <input type="text" readonly class="form-control-plaintext" id="staticEmail2" value="Busqueda por DNI">
+                        <label for="IngreseBusqueda" class="sr-only">Ingrese Busqueda</label>
+                        <input type="text" readonly class="form-control-plaintext" id="IngreseBusqueda" value="Ingrese su Busqueda:">
                     </div>
                     <div class="form-group mx-sm-3 mb-2">
-                        <label for="inputPassword2" class="sr-only">DNI</label>
-                        <input type="text" class="form-control" id="inputPassword2" placeholder="">
+                        <label for="buscar" class="sr-only">Buscar</label>
+                        <input type="search" class="form-control" ng-model="busqueda" >
                     </div>
-                    <button type="submit" class="btn btn-dark mb-2">Buscar</button>
-                </form>
-
-            </div>
-            <div class="col-md-6">
-                <form class="form-inline">
-                    <div class="form-group mb-2">
-                        <label for="staticEmail2" class="sr-only">Apellido</label>
-                        <input type="text" readonly class="form-control-plaintext" id="staticEmail2" value="Busqueda por Apellido">
-                    </div>
-                    <div class="form-group mx-sm-3 mb-2">
-                        <label for="inputPassword2" class="sr-only">Apellido</label>
-                        <input type="text" class="form-control" id="inputPassword2" placeholder="">
-                    </div>
-                    <button type="submit" class="btn btn-dark mb-2">Buscar</button>
                 </form>
 
             </div>
@@ -70,167 +55,27 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>0</td>
-                    <td>47464093</td>
-                    <td>Corilla Canchari</td>
-                    <td>José</td>
-                    <td>Asociado</td>
-                    <td>Tiempo Completo</td>
+                <tr ng-repeat="docente in docentes | filter: busqueda">
+                    <td>{{docente.id}}</td>
+                    <td>{{docente.empleado.dni}}</td>
+                    <td>{{docente.empleado.apellidopaterno}} {{docente.empleado.apellidomaterno}}</td>
+                    <td>{{docente.empleado.nombres}}</td>
+                    <td>{{docente.categoriadocente}}</td>
+                    <td>{{docente.regimendedicacion}}</td>
                     <td>FCEAC</td>
-                    <td>Masculino</td>
-                    <td><a href="#/docente/mantenimiento/modificardocente" class="btn btn-success">Modificar</td>
+                    <td>{{docente.empleado.sexo}}</td>
+                    <td><a href="#/docnte/mantenimiento/modificardocente" class="btn btn-success">Modificar</a></td>
                     <td>
                         <!-- Button trigger modal -->
                         <button id="agregar" type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModal">
                             Ver
                         </button>                    
                     </td>
-                    <!-- <td><a href="#/docente/mantenimiento/verdocente" class="btn btn-info">Ver</a></td>-->
-                    <td><a href="" class="btn btn-danger">Eliminar</td>
+                    <!-- <td><a href="#/administrativo/mantenimiento/veradministrativo" class="btn btn-info">Ver</a></td> -->
+                    <td><a href="" class="btn btn-danger">Eliminar</a></td>
 
                 </tr>
-                <tr>
-                    <td>1</td>
-                    <td>47464093</td>
-                    <td>Corilla Canchari</td>
-                    <td>José</td>
-                    <td>Asociado</td>
-                    <td>Tiempo Completo</td>
-                    <td>FCEAC</td>
-                    <td>Masculino</td>
-                    <td><a href="" class="btn btn-success">Modificar</td>
-                    <td><a href="" class="btn btn-info">ver</a></td>
-                    <td><a href="" class="btn btn-danger">Eliminar</td>
-
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>47464093</td>
-                    <td>Corilla Canchari</td>
-                    <td>José</td>
-                    <td>Asociado</td>
-                    <td>Tiempo Completo</td>
-                    <td>FCEAC</td>
-                    <td>Masculino</td>
-                    <td><a href="" class="btn btn-success">Modificar</td>
-                    <td><a href="" class="btn btn-info">ver</a></td>
-                    <td><a href="" class="btn btn-danger">Eliminar</td>
-
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>47464093</td>
-                    <td>Corilla Canchari</td>
-                    <td>José</td>
-                    <td>Asociado</td>
-                    <td>Tiempo Completo</td>
-                    <td>FCEAC</td>
-                    <td>Masculino</td>
-                    <td><a href="" class="btn btn-success">Modificar</td>
-                    <td><a href="" class="btn btn-info">ver</a></td>
-                    <td><a href="" class="btn btn-danger">Eliminar</td>
-
-                </tr>
-                <tr>
-                    <td>4</td>
-                    <td>47464093</td>
-                    <td>Corilla Canchari</td>
-                    <td>José</td>
-                    <td>Asociado</td>
-                    <td>Tiempo Completo</td>
-                    <td>FCEAC</td>
-                    <td>Masculino</td>
-                    <td><a href="" class="btn btn-success">Modificar</td>
-                    <td><a href="" class="btn btn-info">ver</a></td>
-                    <td><a href="" class="btn btn-danger">Eliminar</td>
-
-                </tr>
-                <tr>
-                    <td>5</td>
-                    <td>47464093</td>
-                    <td>Corilla Canchari</td>
-                    <td>José</td>
-                    <td>Asociado</td>
-                    <td>Tiempo Completo</td>
-                    <td>FCEAC</td>
-                    <td>Masculino</td>
-                    <td><a href="" class="btn btn-success">Modificar</td>
-                    <td><a href="" class="btn btn-info">ver</a></td>
-                    <td><a href="" class="btn btn-danger">Eliminar</td>
-
-                </tr>
-                <tr>
-                    <td>6</td>
-                    <td>47464093</td>
-                    <td>Corilla Canchari</td>
-                    <td>José</td>
-                    <td>Asociado</td>
-                    <td>Tiempo Completo</td>
-                    <td>FCEAC</td>
-                    <td>Masculino</td>
-                    <td><a href="" class="btn btn-success">Modificar</td>
-                    <td><a href="" class="btn btn-info">ver</a></td>
-                    <td><a href="" class="btn btn-danger">Eliminar</td>
-
-                </tr>
-                <tr>
-                    <td>7</td>
-                    <td>47464093</td>
-                    <td>Corilla Canchari</td>
-                    <td>José</td>
-                    <td>Asociado</td>
-                    <td>Tiempo Completo</td>
-                    <td>FCEAC</td>
-                    <td>Masculino</td>
-                    <td><a href="" class="btn btn-success">Modificar</td>
-                    <td><a href="" class="btn btn-info">ver</a></td>
-                    <td><a href="" class="btn btn-danger">Eliminar</td>
-
-                </tr>
-                <tr>
-                    <td>8</td>
-                    <td>47464093</td>
-                    <td>Corilla Canchari</td>
-                    <td>José</td>
-                    <td>Asociado</td>
-                    <td>Tiempo Completo</td>
-                    <td>FCEAC</td>
-                    <td>Masculino</td>
-                    <td><a href="" class="btn btn-success">Modificar</td>
-                    <td><a href="" class="btn btn-info">ver</a></td>
-                    <td><a href="" class="btn btn-danger">Eliminar</td>
-
-                </tr>
-                <tr>
-                    <td>9</td>
-                    <td>47464093</td>
-                    <td>Corilla Canchari</td>
-                    <td>José</td>
-                    <td>Asociado</td>
-                    <td>Tiempo Completo</td>
-                    <td>FCEAC</td>
-                    <td>Masculino</td>
-                    <td><a href="" class="btn btn-success">Modificar</td>
-                    <td><a href="" class="btn btn-info">ver</a></td>
-                    <td><a href="" class="btn btn-danger">Eliminar</td>
-
-                </tr>
-                <tr>
-                    <td>10</td>
-                    <td>47464093</td>
-                    <td>Corilla Canchari</td>
-                    <td>José</td>
-                    <td>Asociado</td>
-                    <td>Tiempo Completo</td>
-                    <td>FCEAC</td>
-                    <td>Masculino</td>
-                    <td><a href="" class="btn btn-success">Modificar</td>
-                    <td><a href="" class="btn btn-info">ver</a></td>
-                    <td><a href="" class="btn btn-danger">Eliminar</td>
-
-                </tr>
-
+               
 
 
             </tbody>

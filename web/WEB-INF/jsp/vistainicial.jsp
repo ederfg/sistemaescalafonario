@@ -13,6 +13,6 @@
         <li class="breadcrumb-item active" aria-current="page">Inicio</li>
     </ol>
 </nav>
-    <p>${listadoA}</p>
+<img class="border border-primary" src="${pageContext.request.contextPath}/assets/styles/logo2.jpg" alt="Responsive image" />
 
 

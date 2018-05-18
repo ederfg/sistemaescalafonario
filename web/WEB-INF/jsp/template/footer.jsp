@@ -7,8 +7,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <div class="container">
-    <p class="float-right">
-        <a href="#">Volver arriba</a>
-    </p>
-    <p><center>&copy; 2017-2018 Oficina de Personal</center></p>
+        <p><center>&copy; 2017-2018 Oficina de Personal</center></p>
 </div>

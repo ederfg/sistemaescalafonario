@@ -5,9 +5,35 @@
  */
 package pe.unsch.sistemaescalafonario.controller;
 
+import com.google.gson.Gson;
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import pe.unsch.sistemaescalafonario.entity.Administrativo;
+import pe.unsch.sistemaescalafonario.entity.Datosacademicos;
+import pe.unsch.sistemaescalafonario.entity.Datosfamilia;
+import pe.unsch.sistemaescalafonario.entity.Datoshijos;
+import pe.unsch.sistemaescalafonario.entity.Datoslaboral;
+import pe.unsch.sistemaescalafonario.entity.Departamento;
+import pe.unsch.sistemaescalafonario.entity.Distrito;
+import pe.unsch.sistemaescalafonario.entity.Docente;
+import pe.unsch.sistemaescalafonario.entity.Empleado;
+import pe.unsch.sistemaescalafonario.entity.Gradoacademico;
+import pe.unsch.sistemaescalafonario.entity.Provincia;
+import pe.unsch.sistemaescalafonario.service.DatosacademicosService;
+import pe.unsch.sistemaescalafonario.service.DatosfamiliaService;
+import pe.unsch.sistemaescalafonario.service.DatoshijosService;
+import pe.unsch.sistemaescalafonario.service.DatoslaboralService;
+import pe.unsch.sistemaescalafonario.service.DepartamentoService;
+import pe.unsch.sistemaescalafonario.service.DistritoService;
+import pe.unsch.sistemaescalafonario.service.DocenteService;
+import pe.unsch.sistemaescalafonario.service.EmpleadoService;
+import pe.unsch.sistemaescalafonario.service.GradoacademicoService;
+import pe.unsch.sistemaescalafonario.service.ProvinciaService;
 
 /**
  *
@@ -60,4 +86,137 @@ public class DocenteController {
     public String addendasdocente(){
         return "docente/addendasdocente";
     }
+    
+    
+    Gson gson = new Gson();
+    
+    @Autowired
+    DepartamentoService departamentoService;
+    @Autowired
+    ProvinciaService provinciaService;
+    @Autowired
+    DistritoService distritoService;
+    
+    
+    @Autowired
+    EmpleadoService empleadoService;
+    @Autowired
+    DocenteService docenteService;
+    @Autowired
+    DatoslaboralService datoslaboralService;
+    @Autowired
+    DatosacademicosService datosacademicosService;
+    @Autowired
+    GradoacademicoService gradoacademicoService;
+    @Autowired
+    DatosfamiliaService datosfamiliaService;
+    @Autowired
+    DatoshijosService datoshijosService;
+    
+     
+    @RequestMapping(value = "listadodocentes",method = RequestMethod.GET)
+    @ResponseBody
+    public String listadoDoc(){
+        List<Docente> listDoc = docenteService.listarTodo();
+        String listadoJSON = gson.toJson(listDoc);
+        return listadoJSON;
+    }
+    
+    //Listado de departamentos
+    @RequestMapping(value = "listadodepartamento",method = RequestMethod.GET)
+    @ResponseBody
+    public String listadoDepartamento(){
+        List<Departamento> listDepartamento = departamentoService.listarTodo();
+        String listadoJSON = gson.toJson(listDepartamento);
+        return listadoJSON;
+    }
+    // Listado de provincias
+    @RequestMapping(value = "listadoprovincia",method = RequestMethod.POST)
+    @ResponseBody
+    public String listadoProvincia(@RequestBody Departamento departamento){
+        List<Provincia> listProvincia = provinciaService.listarProvxDep(departamento);
+        String listadoJSON = gson.toJson(listProvincia);
+        return listadoJSON;
+    }
+    //Listado de distritos
+    @RequestMapping(value = "listadodistrito",method = RequestMethod.POST)
+    @ResponseBody
+    public String listadoDistrito(@RequestBody Provincia provincia){
+        List<Distrito> listDistrito = distritoService.listarDistxProv(provincia);
+        String listadoJSON = gson.toJson(listDistrito);
+        return listadoJSON;
+    }
+   
+    //Guardar Empleado
+    @RequestMapping(value = "guardarempleado",method = RequestMethod.POST)
+    @ResponseBody
+    public String guardarEmpleado(@RequestBody Empleado empleado){
+        int rest = empleadoService.guardar(empleado);
+        if (rest ==1) {
+            Empleado emp = empleado;
+            String respuesta = gson.toJson(emp);
+            return respuesta;
+        }else{
+            return "error"; 
+        }
+        //return rest;
+    }
+    
+    //Guardar adm
+    @RequestMapping(value = "guardardocente",method = RequestMethod.POST)
+    @ResponseBody
+    public int guardarDocente(@RequestBody Docente docente){
+        return docenteService.guardar(docente);
+    }
+    
+    //Guardar adm
+    @RequestMapping(value = "guardardatoslaboral",method = RequestMethod.POST)
+    @ResponseBody
+    public int guardarDatoLaboral(@RequestBody Datoslaboral datoslaboral){
+        return datoslaboralService.guardar(datoslaboral);
+    }
+    
+    //Guardar datos academicos
+     @RequestMapping(value = "guardardatosacademicos",method = RequestMethod.POST)
+    @ResponseBody
+    public int guardarDatoAcademico(@RequestBody Datosacademicos datosacademicos){
+        return datosacademicosService.guardar(datosacademicos);
+    }
+    //Guardar grado academico
+     @RequestMapping(value = "guardargradoacademico",method = RequestMethod.POST)
+    @ResponseBody
+    public int guardarGradoAcademico(@RequestBody Gradoacademico gradoacademico){
+        return gradoacademicoService.guardar(gradoacademico);
+    }
+    
+    //Guardar datos familia
+    @RequestMapping(value = "guardardatosfamilia",method = RequestMethod.POST)
+    @ResponseBody
+    public String guardarDatoFamilia(@RequestBody Datosfamilia datosfamilia){
+         int rest = datosfamiliaService.guardar(datosfamilia);
+        if (rest ==1) {
+            Datosfamilia df = datosfamilia;
+            String respuesta = gson.toJson(df);
+            return respuesta;
+        }else{
+            return "error"; 
+        }
+    }
+    //Guardar datos hijo
+    @RequestMapping(value = "guardardatoshijo",method = RequestMethod.POST)
+    @ResponseBody
+    public int guardarDatoHijo(@RequestBody Datoshijos datoshijos){
+        return datoshijosService.guardar(datoshijos);
+    }
+    
+    
+        
+    //listar empleado   
+     //Guardar adm
+    @RequestMapping(value = "listempleado",method = RequestMethod.GET)
+    @ResponseBody
+    public List<Empleado> listarEmpleado(){
+        return empleadoService.listarTodo();
+    }
+    
 }

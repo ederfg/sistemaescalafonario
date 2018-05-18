@@ -51,6 +51,7 @@
     
     
     <script src="${pageContext.request.contextPath}/assets/administracion/angular/servicios/administrativoService.js" type="text/javascript"></script>
+    <script src="${pageContext.request.contextPath}/assets/administracion/angular/servicios/docenteService.js" type="text/javascript"></script>
 
 
     <!-- Bootstrap core JavaScript
