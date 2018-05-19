@@ -15,7 +15,8 @@
         'personalApp.administrativoControler',
         
         
-        'personalApp.administrativoService'
+        'personalApp.administrativoService',
+        'personalApp.docenteService'
         
         
     ]);

@@ -22,7 +22,7 @@
 
     <div class="col-md-12 order-md-1">
         <h4 class="mb-3">DATOS PERSONALES</h4>
-        <form class="needs-validation" ng-submit="guardarTodoDocente(empleado, docente, datoslaboral, listadatosacademicos,listagradoacademico, datosfamilia, listadatoshijos)">
+        <form class="needs-validation" ng-submit="guardarTodoDocente(empleado, docente, datoslaboral, listadatosacademicos, listagradoacademico, datosfamilia, listadatoshijos)">
             <div class="row">
                 <div class="col-md-4 mb-3">
                     <label for="apPaterno">Apellido Paterno</label>
@@ -69,8 +69,8 @@
                     <label for="sexo">Sexo</label>
                     <select class="custom-select d-block w-100" id="sexo" required ng-model="empleado.sexo">
                         <option value="">Escoger...</option>
-                        <option>M</option>
-                        <option>F</option>
+                        <option>Masculino</option>
+                        <option>Femenino</option>
                     </select>
                     <div class="invalid-feedback">
                         Por favor selecciona un tipo de sexo.
@@ -193,12 +193,12 @@
                         Por favor selecciona el sistema pensionario
                     </div>
                 </div>
-                
+
 
             </div>
 
             <div class="row">
-                
+
 
                 <div class="col-md-6 d-inline my-3">
                     <label for="sistPens">¿Perceptor de mayor ingreso en el hogar?</label>     
@@ -231,9 +231,9 @@
             </div> 
 
             <hr class="mb-4">
-            
+
             <h4 class="mb-3">DATOS DE VINCULO LABORAL</h4>
-            
+
             <div class="row">
                 <div class="col-md-3 mb-3">
                     <label for="codigo">Código</label>
@@ -284,14 +284,15 @@
                         <option value="SPA">ASTP</option>
                         <option value="SPB">AUTP</option>
                         <option value="SPC">JPTP</option>
-                        
+
                     </select>
                     <div class="invalid-feedback">
                         Por favor selecciona una categoria. 
                     </div>
                 </div> 
-                                   
+
             </div>
+            <p>{{docente| json}} </p>
 
             <div class="row">
                 <div class="col-md-3 mb-3">
@@ -314,7 +315,7 @@
                         Por favor selecciona una condicion. 
                     </div>
                 </div>
-                
+
                 <div class="col-md-3 mb-3">
                     <label for="tipoContrato">Tipo de Contrato</label>
                     <input type="text" class="form-control" ng-model="datoslaboral.tipocontrato" id="tipoContrato" placeholder="" value="" required>
@@ -322,7 +323,7 @@
                         Por favor ingrese el tipo de contrato.
                     </div>
                 </div>
-                
+
                 <div class="col-md-3 mb-3">
                     <label for="puesto">Puesto Ocupado</label>
                     <input type="text" class="form-control" ng-model="datoslaboral.puesto" id="puesto" placeholder="" value="" required>
@@ -334,7 +335,7 @@
             </div>  
 
             <div class="row">
-                
+
                 <div class="col-md-4 mb-3">
                     <label for="facultad">Facultad</label>
                     <select class="custom-select d-block w-100" ng-model="datoslaboral.facultad" id="facultad" required>
@@ -386,15 +387,15 @@
                         Por favor ingrese la fecha de cese.
                     </div>
                 </div> 
-
+                <p>{{datoslaboral| json}} </p>
             </div>
-            
+
             <hr class="mb-4">
             <div class="row">
                 <div class="col-md-12">
                     <h4 class="mb-3">DATOS ACADEMICOS</h4>
                     <label>Llenar solo los niveles educativos que se obtuvieron</label>                
-                    <!-- Button trigger modal -->
+
                     <br>
                     <button id="agregar" type="button" class="btn btn-toolbar" data-toggle="modal" data-target="#exampleModalA">
                         Agregar Nivel Educativo
@@ -446,7 +447,7 @@
                                 <td>{{gradoacademico.condicion}}</td>
                                 <td>{{gradoacademico.nombreinstitucion}}</td>
                                 <td>{{gradoacademico.fechaconclusion}}</td>
-                                
+
                             </tr>
 
                         </tbody>
@@ -454,7 +455,7 @@
                     <p>{{listagradosacademico}}</p>
                 </div>
             </div>
-            
+
 
 
             <br>
@@ -519,7 +520,7 @@
                     </div>
                 </div> 
             </div>  
-            
+
             <label><B>En caso de emergencia llamar a:</B></label>         
             <div class="row">
 
@@ -540,15 +541,15 @@
                     </div>
                 </div>
             </div>
-              <p>{{datosfamilia | json}}<p>
-                  
-            <label><B>Hijos (solo menores de edad)</B></label>
-            <!-- Button trigger modal -->
-            <br>
-            <button id="agregar" type="button" class="btn btn-toolbar" data-toggle="modal" data-target="#agregarHijo">
-                Agregar Hijo
-            </button>
-            <br>
+            <p>{{datosfamilia| json}}<p>
+
+                <label><B>Hijos (solo menores de edad)</B></label>
+
+                <br>
+                <button id="agregar" type="button" class="btn btn-toolbar" data-toggle="modal" data-target="#agregarHijo">
+                    Agregar Hijo
+                </button>
+                <br>
             <table class="table table-bordered btn-success">
                 <thead>
                     <tr>
@@ -563,7 +564,7 @@
                 </thead>
                 <tbody>
                     <tr ng-repeat="datohijo in listadatoshijos">
-                        <th scope="row">{{$index+1}}</th>
+                        <th scope="row">{{$index + 1}}</th>
                         <td>{{datohijo.dnihijo}}</td>
                         <td>{{datohijo.appathijo}}</td>
                         <td>{{datohijo.apmathijo}}</td>
@@ -574,20 +575,20 @@
 
                 </tbody>
             </table>                                          
-            
-              <p>{{listadatoshijos | json}}</p>
-          
+
+            <p>{{listadatoshijos| json}}</p>
+
 
             <center>
                 <button class="btn btn-secondary" type="button">Cancelar</button>
                 <button class="btn btn-primary " type="submit">Guardar</button>
             </center>
-      
+
         </form>
 
     </div>
 
-    
+
 </div>
 
 

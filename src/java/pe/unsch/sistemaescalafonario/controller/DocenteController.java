@@ -6,6 +6,7 @@
 package pe.unsch.sistemaescalafonario.controller;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import pe.unsch.sistemaescalafonario.entity.Administrativo;
+
 import pe.unsch.sistemaescalafonario.entity.Datosacademicos;
 import pe.unsch.sistemaescalafonario.entity.Datosfamilia;
 import pe.unsch.sistemaescalafonario.entity.Datoshijos;
@@ -89,6 +90,10 @@ public class DocenteController {
     
     
     Gson gson = new Gson();
+    
+    public DocenteController() {
+        gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+    }
     
     @Autowired
     DepartamentoService departamentoService;
@@ -169,7 +174,7 @@ public class DocenteController {
         return docenteService.guardar(docente);
     }
     
-    //Guardar adm
+    //Guardar datos laboral
     @RequestMapping(value = "guardardatoslaboral",method = RequestMethod.POST)
     @ResponseBody
     public int guardarDatoLaboral(@RequestBody Datoslaboral datoslaboral){

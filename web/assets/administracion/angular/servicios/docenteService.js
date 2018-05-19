@@ -13,12 +13,11 @@ appPersonal.factory('DocenteServ', ['$http', '$q', function ($http, $q) {
             'departamentos': [],
             'provincias': [],
             'distritos': [],
-            
+
             'docentes': [],
             'empleadoGuardado': {},
             'empleados': [],
-         
-            
+
             listarDepartamento: function () {
                 var d = $q.defer();
                 $http.get('/sistemaescalafonario/docente/listadodepartamento')
@@ -51,8 +50,8 @@ appPersonal.factory('DocenteServ', ['$http', '$q', function ($http, $q) {
                         });
                 return d.promise;
             },
-            
-            guardarTodoDocente: function (empleado, docente, datoslaboral, listadatosacademicos,listagradoacademico, datosfamilia, listadatoshijos) {
+
+            guardarTodoDocente: function (empleado, docente, datoslaboral, listadatosacademicos, listagradoacademico, datosfamilia, listadatoshijos) {
                 var d = $q.defer();
                 var df = $q.defer();
                 //var listadoda = [];
@@ -158,12 +157,7 @@ appPersonal.factory('DocenteServ', ['$http', '$q', function ($http, $q) {
                         });
                 return d.promise;
             },
-            
-                   
-            
-                          
-            
-            
+
             listarDocente: function () {
                 var d = $q.defer();
                 $http.get('/sistemaescalafonario/docente/listadodocentes')
@@ -174,7 +168,7 @@ appPersonal.factory('DocenteServ', ['$http', '$q', function ($http, $q) {
                         });
                 return d.promise;
             },
-            
+
             listarEmpleado: function () {
                 var d = $q.defer();
                 $http.get('/sistemaescalafonario/docente/listempleado')
