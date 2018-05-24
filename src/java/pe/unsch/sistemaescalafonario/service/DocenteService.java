@@ -12,5 +12,5 @@ import pe.unsch.sistemaescalafonario.entity.Docente;
  * @author José
  */
 public interface DocenteService extends GenericService<Docente>{
-    
+    Docente obtenerDatosDocentePorIdEmpleado (int idempleado);
 }

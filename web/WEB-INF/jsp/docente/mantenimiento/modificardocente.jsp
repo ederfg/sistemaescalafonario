@@ -13,7 +13,473 @@
         <li class="breadcrumb-item active" aria-current="page">Modificar</li>
     </ol>
 </nav>
+
 <div class="container">
+    <div class="py-5 text-center">
+        <i class="material-icons md-48">assignment_ind</i>  
+        <h2>MODIFICAR DATOS DEL PERSONAL</h2>
+        <p class="lead">Modifique los datos requeridos del administrativo, luego guarde los cambios.</p>
+    </div>
+
+    <button class="btn btn-primary" ng-click="mostrarDatosPersonales()">Modificar Datos Personales</button>
+    <button class="btn btn-success" ng-click="mostrarDatosDocente()">Modificar Datos Docente</button>
+    <button class="btn btn-warning" ng-click="mostrarDatosLaboral()">Modificar Datos Laboral</button>
+</div>
+
+
+
+<!-- Modal Para Datos personales  -->
+<div class="modal fade" id="modalDatosPersonales" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabelB" aria-hidden="true">
+    <div class=" modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabelB">Modificar Datos Personales</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form ng-submit="actualizarDatosPersonales(empleado)">
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <label for="apPaterno">Apellido Paterno</label>
+                            <input type="text" class="form-control" id="apPaterno" placeholder="" required
+                                   ng-model="empleado.apellidopaterno">
+                            <div class="invalid-feedback">
+                                Es obligatorio ingresar el apellido paterno.
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="apMaterno">Apellido Materno</label>
+                            <input type="text" class="form-control" id="apMaterno" placeholder="" value="" required
+                                   ng-model="empleado.apellidomaterno">
+                            <div class="invalid-feedback">
+                                Es obligatorio ingresar el apellido materno.
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="nombres">Nombres</label>
+                            <input type="text" class="form-control" id="nombres" placeholder="" value="" required
+                                   ng-model="empleado.nombres">
+                            <div class="invalid-feedback">
+                                Es obligatorio ingresar los nombres.
+                            </div>
+                        </div>  
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-2 mb-3">
+                            <label for="dni">DNI N°</label>
+                            <input type="text" class="form-control" id="dni" placeholder="" value="" required ng-model="empleado.dni">
+                            <div class="invalid-feedback">
+                                Es obligatorio ingresar el DNI. 
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label for="fechaNac">Fecha de Nacimiento</label>
+                            <input type="date" class="form-control" id="fechaNac" placeholder="" value="" required ng-model="empleado.fechanacimiento">
+                            <div class="invalid-feedback">
+                                Es obligatorio ingresar la fecha de nacimiento.
+                            </div>
+                        </div>
+                        <div class="col-md-2 mb-3">
+                            <label for="sexo">Sexo</label>
+                            <select class="custom-select d-block w-100" id="sexo" required ng-model="empleado.sexo">
+                                <option value="">Escoger...</option>
+                                <option value="Masculino">Masculino</option>
+                                <option value="Femenino">Femenino</option>
+                            </select>
+                            <div class="invalid-feedback">
+                                Por favor selecciona un tipo de sexo.
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label for="estadoCivil">Estado Civil</label>
+                            <select class="custom-select d-block w-100" ng-model="empleado.estadocivil" id="estadoCivil" required>
+                                <option value="">Escoger...</option>
+                                <option value="Solter@">Solter@</option>
+                                <option value="Casad@">Casad@</option>
+                                <option value="Viud@">Viud@</option>
+                                <option value="Divorciad@">Divorciad@</option>
+                                <option value="Concubin@">Concubin@</option>
+                            </select>
+                            <div class="invalid-feedback">
+                                Por favor selecciona un estado civil.
+                            </div>
+                        </div> 
+                        <div class="col-md-2 mb-3">
+                            <label for="grupoSang">Grupo Sanguineo</label>
+                            <select class="custom-select d-block w-100" id="grupoSang" required ng-model="empleado.gruposanguineo">
+                                <option value="">Escoger...</option>
+                                <option>A+</option>
+                                <option>A-</option>
+                                <option>B+</option>
+                                <option>B-</option>
+                                <option>AB+</option>
+                                <option>AB-</option>
+                                <option>O+</option>
+                                <option>O-</option>
+                            </select>
+                            <div class="invalid-feedback">
+                                Por favor selecciona el tipo de sangue.
+                            </div>
+                        </div>
+
+                    </div>  
+
+                    <div class="mb-3">
+                        <label for="direccion">Dirección</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="direccion" placeholder="" required ng-model="empleado.direccion">
+                            <div class="invalid-feedback" style="width: 100%;">
+                                Por favor ingrese su direccion correcta
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="form-row">
+                        <div class="col-md-3 mb-3">
+                            <label for="depa">Departamento</label>
+                            <input type="text" class="form-control" ng-model="empleado.distrito.provincia.departamento.nombredepartamento" 
+                                   id="depa" placeholder="" required readonly="">
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label for="prov">Provincia</label>
+                            <input type="text" class="form-control" ng-model="empleado.distrito.provincia.nombreprovincia"
+                                   id="prov" placeholder="" required readonly="">
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label for="dist">Distrito</label>
+                            <input type="text" class="form-control" ng-model="empleado.distrito.nombredistrito"
+                                   id="dist" placeholder="" required readonly="">
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label for="edit">Editar</label>
+                            <input type="checkbox" class="form-control" ng-model="editarUbigeo"
+                                   id="edit" placeholder="" required readonly="">
+                        </div>
+                    </div>
+
+
+                    <div class="form-row" ng-if="editarUbigeo">
+                        <div class="col-md-4 mb-3">
+                            <label for="depa">Departamento</label>
+                            <select class="custom-select d-block w-100" id="depa" required
+                                    ng-model="departamento"
+                                    ng-options="departamento as departamento.nombredepartamento for departamento in departamentos track by departamento.id"
+                                    ng-change="listarProvincia(departamento)">
+                                <option value="">Escoger...</option>
+                            </select>
+                            <div class="invalid-feedback">
+                                Por favor selecciona un departamento
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="prov">Provincia</label>
+                            <select class="custom-select d-block w-100" id="prov" required
+                                    ng-model="provincia"
+                                    ng-options="provincia as provincia.nombreprovincia for provincia in provincias"
+                                    ng-change="listarDistrito(provincia)">
+                                <option value="">Escoger...</option>
+                            </select>
+                            <div class="invalid-feedback">
+                                Por favor selecciona una provincia
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="dist">Distrito</label>
+                            <select class="custom-select d-block w-100" id="dist" required 
+                                    ng-model="empleado.distrito" 
+                                    ng-options="distrito as distrito.nombredistrito for distrito in distritos">
+                                <option value="">Escoger...</option>
+                            </select>
+                            <div class="invalid-feedback">
+                                Por favor selecciona un distrito
+                            </div>
+                        </div>  
+
+                    </div>    
+
+                    <div class="row">
+                        <div class="col-md-3 mb-3">
+                            <label for="cel">Celular</label>
+                            <input type="text" class="form-control" id="cel" placeholder="" value="" required ng-model="empleado.celular">
+                            <div class="invalid-feedback">
+                                Por favor ingrese un celular.
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label for="correo">Correo<span class="text-muted">(Ejm: yelina24@gmail.com)</span></label>
+                            <input type="text" class="form-control" id="correo" placeholder="" value="" required ng-model="empleado.correoelectronico">
+                            <div class="invalid-feedback">
+                                Por favor ingrese un correo.
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label for="ruc">N° de RUC</label>
+                            <input type="text" class="form-control" id="ruc" placeholder="" value="" required ng-model="empleado.ruc">
+                            <div class="invalid-feedback">
+                                Por favor ingrese su numero de RUC.
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label for="sistPens">Sistema Pensionario</label>
+                            <select class="custom-select d-block w-100" id="sistPens" required ng-model="empleado.sistemapensionario">
+                                <option value="">Escoger...</option>
+                                <option value="Sistema Nacional de Pensiones">Sistema Nacional de Pensiones</option>
+                                <option value="Sistema Privado de Pensiones">Sistema Privado de Pensiones</option>
+                            </select>
+                            <div class="invalid-feedback">
+                                Por favor selecciona el sistema pensionario
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    <div class="row">
+
+
+                        <div class="col-md-6 d-inline my-3">
+                            <label for="sistPens">¿Perceptor de mayor ingreso en el hogar?</label>     
+                            <div class="custom-control custom-radio">
+                                <input id="credit" name="mayoringreso" type="radio" ng-model="empleado.mayoringreso" ng-value="true" class="custom-control-input" required>
+                                <label class="custom-control-label" for="credit">Si</label>
+                            </div>
+                            <div class="custom-control custom-radio">
+                                <input id="debit" name="mayoringreso" type="radio" ng-model="empleado.mayoringreso" ng-value="false" class="custom-control-input" required>
+                                <label class="custom-control-label" for="debit">No</label>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 d-inline my-3">
+                            <label for="sistPens">¿Afiliado a algún sindicato?</label>     
+                            <div class="custom-control custom-radio">
+                                <input id="2" name="afiliacionsindicato" type="radio" ng-model="empleado.afiliacionsindicato" ng-value="true" class="custom-control-input" required>
+                                <label class="custom-control-label" for="2">Si</label>
+                            </div>
+                            <div class="custom-control custom-radio">
+                                <input id="3" name="afiliacionsindicato" type="radio" ng-model="empleado.afiliacionsindicato" ng-value="false" class="custom-control-input" required>
+                                <label class="custom-control-label" for="3">No</label>
+                            </div>
+                        </div>       
+
+                    </div> 
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal datos docente -->
+<div class="modal fade" id="modalDatosDocente" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class=" modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Datos Docente</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form ng-submit="actualizarDatosDocente(docente)">
+                    <div class="form-row">
+                        <div class="col-md-3 mb-3">
+                            <label for="codigo">Código</label>
+                            <input type="text" class="form-control" id="codigo" placeholder="" ng-model="docente.codigodocente" required>
+                            <div class="invalid-feedback">
+                                Es obligatorio ingresar el codigo
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label for="categoria">Categoría Docente</label>
+                            <select class="custom-select d-block w-100" id="categoria" ng-model="docente.categoriadocente" required>
+                                <option value="">Escoger...</option>
+                                <option>Principal</option>
+                                <option>Asociado</option>
+                                <option>Auxiliar</option>
+                                <option>Jefe Practicas</option>
+                            </select>
+                            <div class="invalid-feedback">
+                                Por favor selecciona una categoria. 
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label for="regimenDed">Régimen Dedicación</label>
+                            <select class="custom-select d-block w-100" id="regimenDed" ng-model="docente.regimendedicacion" required>
+                                <option value="">Escoger...</option>
+                                <option>Exclusivo</option>
+                                <option>Completo</option>
+                                <option>Parcial</option>
+
+                            </select>
+                            <div class="invalid-feedback">
+                                Por favor selecciona un regimen de dedicacion. 
+                            </div>
+                        </div> 
+                        <div class="col-md-3 mb-3">
+                            <label for="categoriaAdm">Nivel Remunerativo</label>
+                            <select class="custom-select d-block w-100" id="categoriaAdm" ng-model="docente.nivelremunerativodoc" >
+                                <option value="">Escoger...</option>
+                                <option value="PRDE">PRDE</option>
+                                <option value="ASDE">ASDE</option>
+                                <option value="AUDE">AUDE</option>
+                                <option value="JPDE">JPDE</option>
+                                <option value="PRTC">PRTC</option>
+                                <option value="ASTC">ASTC</option>
+                                <option value="AUTC">AUTC</option>
+                                <option value="JPTC">JPTC</option>
+                                <option value="PRTP">PRTP</option>
+                                <option value="ASTP">ASTP</option>
+                                <option value="AUTP">AUTP</option>
+                                <option value="JPTP">JPTP</option>
+
+                            </select>
+                            <div class="invalid-feedback">
+                                Por favor selecciona una categoria. 
+                            </div>
+                        </div> 
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Modal datos laboral -->
+<div class="modal fade" id="modalDatosLaboral" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabelA" aria-hidden="true">
+    <div class=" modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabelA">Modificar Datos Laboral</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form ng-submit="actualizarDatosLaboral(datoslaboral)">
+                    <div class="row">
+                        <div class="col-md-3 mb-3">
+                            <label for="fechaIngreso">Fecha Ingreso a la Institución</label>
+                            <input type="date" class="form-control" ng-model="datoslaboral.fechaingresoinst" id="fechaIngreso" placeholder="" value="" required>
+                            <div class="invalid-feedback">
+                                Por favor ingrese la fecha de ingreso a la institucion.
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label for="condicionLab">Condición Laboral</label>
+                            <select class="custom-select d-block w-100" ng-model="datoslaboral.condicionlaboral" id="condicionLab" required>
+                                <option value="">Escoger...</option>
+                                <option value="Nombrado">Nombrado</option>
+                                <option value="Contratado">Contratado</option>
+                                <option value="CAS">CAS</option>
+                                <option value="Otros">Otros</option>
+                            </select>
+                            <div class="invalid-feedback">
+                                Por favor selecciona una condicion. 
+                            </div>
+                        </div>
+
+                        <div class="col-md-3 mb-3">
+                            <label for="tipoContrato">Tipo de Contrato</label>
+                            <input type="text" class="form-control" ng-model="datoslaboral.tipocontrato" id="tipoContrato" placeholder="" value="" required>
+                            <div class="invalid-feedback">
+                                Por favor ingrese el tipo de contrato.
+                            </div>
+                        </div>
+
+                        <div class="col-md-3 mb-3">
+                            <label for="puesto">Puesto Ocupado</label>
+                            <input type="text" class="form-control" ng-model="datoslaboral.puesto" id="puesto" placeholder="" value="" required>
+                            <div class="invalid-feedback">
+                                Por favor ingrese el puesto.
+                            </div>
+                        </div>
+
+                    </div>  
+
+                    <div class="row">
+
+                        <div class="col-md-4 mb-3">
+                            <label for="facultad">Facultad</label>
+                            <select class="custom-select d-block w-100" ng-model="datoslaboral.facultad" id="facultad" required>
+                                <option value="">Escoger...</option>
+                                <option value="FACULTAD DE CIENCIAS AGRARIAS">FACULTAD DE CIENCIAS AGRARIAS</option>
+                                <option value="FACULTAD DE CIENCIAS BIOLOGICAS">FACULTAD DE CIENCIAS BIOLOGICAS</option>
+                                <option value="FACULTAD DE CIENCIAS DE LA EDUCACION">FACULTAD DE CIENCIAS DE LA EDUCACION</option>
+                                <option value="FACULTAD DE CIENCIAS ECONOMICAS , ADMINISTRATIVAS Y CONTABLES">FACULTAD DE CIENCIAS ECONOMICAS , ADMINISTRATIVAS Y CONTABLES</option>
+                                <option value="FACULTAD DE CIENCIAS SOCIALES">FACULTAD DE CIENCIAS SOCIALES</option>
+                                <option value="FACULTAD DE DERECHO Y CIENCIAS POLITICAS">FACULTAD DE DERECHO Y CIENCIAS POLITICAS</option>
+                                <option value="FACULTAD DE ENFERMERIA">FACULTAD DE ENFERMERIA</option>
+                                <option value="FACULTAD DE INGENIERIA DE MINAS, GEOLOGIA Y CIVIL">FACULTAD DE INGENIERIA DE MINAS, GEOLOGIA Y CIVIL</option>
+                                <option value="FACULTAD DE INGENIERIA QUIMICA Y METALURGIA">FACULTAD DE INGENIERIA QUIMICA Y METALURGIA</option>
+                                <option value="FACULTAD DE OBSTETRICIA">FACULTAD DE OBSTETRICIA</option>
+
+                            </select>
+                            <div class="invalid-feedback">
+                                Por favor selecciona una Facultad
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label for="ingresoMensual">Ingreso Mensual Bruto</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">S/</span>
+                                </div>
+                                <input type="text" class="form-control" ng-model="datoslaboral.ingmensualbruto" id="ingresoMensual" placeholder="" required>
+                                <div class="invalid-feedback" style="width: 100%;">
+                                    Por favor ingrese el ingreso mensual.
+                                </div>
+                            </div>
+                        </div> 
+                        <div class="col-md-2 mb-3">
+                            <label for="cese">Tipo de Cese</label>
+                            <select class="custom-select d-block w-100" ng-model="datoslaboral.cese" id="cese" required>
+                                <option value="">Escoger...</option>
+                                <option value="Definitivo">Definitivo</option>
+                                <option value="Parcial">Parcial</option>
+
+                            </select>
+                            <div class="invalid-feedback">
+                                Por favor selecciona el tipo de cese.
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label for="fechaCese">Fecha de Cese</label>
+                            <input type="date" class="form-control" ng-model="datoslaboral.fechacese" id="fechaCese" placeholder="" value="" required>
+                            <div class="invalid-feedback">
+                                Por favor ingrese la fecha de cese.
+                            </div>
+                        </div> 
+                        
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- <div class="container">
     <div class="py-5 text-center">
         <i class="material-icons md-48">assignment_ind</i>  
         <h2>MODIFICAR DATOS DEL PERSONAL</h2>
@@ -311,7 +777,7 @@
 
             </div>  
             <label><B>Hijos (solo menores de edad)</B></label>
-            <!-- Button trigger modal -->
+            
             <br>
             <button id="agregar" type="button" class="btn btn-toolbar" data-toggle="modal" data-target="#exampleModal">
                 Agregar Hijo
@@ -371,7 +837,7 @@
         <form class="needs-validation" novalidate>                                          
 
             <label>Llenar solo los niveles educativos que se obtuvieron</label>                
-            <!-- Button trigger modal -->
+            
             <br>
             <button id="agregar" type="button" class="btn btn-toolbar" data-toggle="modal" data-target="#exampleModalA">
                 Agregar Nivel Educativo
@@ -587,7 +1053,7 @@
 
 
 
-<!-- Modal agregar hijo -->
+<!-- Modal agregar hijo
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class=" modal-dialog modal-lg" role="document">
         <div class="modal-content">
@@ -631,7 +1097,7 @@
 </div>
 
 
-<!-- Modal agregar Nivel Educativo -->
+<!-- Modal agregar Nivel Educativo
 <div class="modal fade" id="exampleModalA" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabelA" aria-hidden="true">
     <div class=" modal-dialog modal-lg" role="document">
         <div class="modal-content">
@@ -683,7 +1149,7 @@
     </div>
 </div>
 
-<!-- Modal agregar Grado Academico -->
+<!-- Modal agregar Grado Academico
 <div class="modal fade" id="exampleModalB" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabelB" aria-hidden="true">
     <div class=" modal-dialog modal-lg" role="document">
         <div class="modal-content">
@@ -733,3 +1199,4 @@
         </div>
     </div>
 </div>
+-->
