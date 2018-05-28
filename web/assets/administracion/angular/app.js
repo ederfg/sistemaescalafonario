@@ -58,7 +58,7 @@
                         templateUrl: '/sistemaescalafonario/docente/mantenimientodocente/registro',
                         controller: 'docenteregistroCtrl'
                     })
-                    .when('/docente/mantenimiento/modificardocente', {
+                    .when('/docente/mantenimiento/modificardocente/:idempleado', {
                         templateUrl: '/sistemaescalafonario/docente/mantenimientodocente/modificar',
                         controller: 'docentemodificarCtrl'
                     })

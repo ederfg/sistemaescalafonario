@@ -64,7 +64,7 @@
                     <td>{{docente.regimendedicacion}}</td>
                     <td>FCEAC</td>
                     <td>{{docente.empleado.sexo}}</td>
-                    <td><a href="#/docnte/mantenimiento/modificardocente" class="btn btn-success">Modificar</a></td>
+                    <td><a href="#/docente/mantenimiento/modificardocente/{{docente.empleado.id}}" class="btn btn-success">Modificar</a></td>
                     <td>
                         <!-- Button trigger modal -->
                         <button id="agregar" type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModal">

@@ -178,6 +178,67 @@ appPersonal.factory('DocenteServ', ['$http', '$q', function ($http, $q) {
                             d.resolve();
                         });
                 return d.promise;
+            },
+            
+            //OBTENER DATOS DEL DOCENTE
+            obtenerDatosPersonales: function (idempleado) {
+                var d = $q.defer();
+                $http.get('/sistemaescalafonario/docente/obtenerdatospersonales/?idempleado='+idempleado)
+                        .success(function (respuesta) {
+                            console.log(respuesta);
+                            //self.empleados = respuesta;
+                            d.resolve(respuesta);
+                        });
+                return d.promise;    
+            },
+            actualizarDatosPersonales: function (empleado) {
+                var d = $q.defer();
+                $http.post('/sistemaescalafonario/docente/actualizardatospersonales',empleado)
+                        .success(function (respuesta) {
+                            console.log(respuesta);
+                            //self.empleados = respuesta;
+                            d.resolve(respuesta);
+                        });
+                return d.promise;    
+            },
+            obtenerDatosDocente: function (idempleado) {
+                var d = $q.defer();
+                $http.get('/sistemaescalafonario/docente/obtenerdatosdocente/?idempleado='+idempleado)
+                        .success(function (respuesta) {
+                            console.log(respuesta);
+                            //self.empleados = respuesta;
+                            d.resolve(respuesta);
+                        });
+                return d.promise;    
+            },
+            actualizarDatosDocente: function (docente) {
+                var d = $q.defer();
+                $http.post('/sistemaescalafonario/docente/actualizardatosdocente',docente)
+                        .success(function (respuesta) {
+                            console.log(respuesta);
+                            //self.empleados = respuesta;
+                            d.resolve(respuesta);
+                        });
+                return d.promise;    
+            },
+            obtenerDatosLaboral: function (idempleado) {
+                var d = $q.defer();
+                $http.get('/sistemaescalafonario/docente/obtenerdatoslaboral/?idempleado='+idempleado)
+                        .success(function (respuesta) {
+                            console.log(respuesta);
+                            //self.empleados = respuesta;
+                            d.resolve(respuesta);
+                        });
+                return d.promise;    
+            },
+            actualizarDatosLaboral: function (datoslaboral) {
+                var d = $q.defer();
+                $http.post('/sistemaescalafonario/docente/actualizardatoslaboral',datoslaboral)
+                        .success(function (respuesta) {
+                            console.log(respuesta);
+                            d.resolve(respuesta);
+                        });
+                return d.promise;    
             }
 
         };

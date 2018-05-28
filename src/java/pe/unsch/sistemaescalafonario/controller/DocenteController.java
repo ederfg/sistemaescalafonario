@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import pe.unsch.sistemaescalafonario.entity.Datosacademicos;
@@ -213,6 +214,48 @@ public class DocenteController {
     public int guardarDatoHijo(@RequestBody Datoshijos datoshijos){
         return datoshijosService.guardar(datoshijos);
     }
+    
+    
+    
+     /*-----------------------------------------MODIFICAR DOCENTE-----------------------------------------------------------*/
+    //Obtener Datos personales
+    @RequestMapping(value = "obtenerdatospersonales",method = RequestMethod.GET)
+    @ResponseBody
+    public Empleado obtenerDatosPersonales(@RequestParam int idempleado){
+        return empleadoService.get(idempleado);
+    }
+    //Actualizar Datos personales
+    @RequestMapping(value = "actualizardatospersonales",method = RequestMethod.POST)
+    @ResponseBody
+    public int actualizarDatosPersonales(@RequestBody Empleado empleado){
+        return empleadoService.update(empleado);
+    }
+    //Obtener Datos Docente
+    @RequestMapping(value = "obtenerdatosdocente",method = RequestMethod.GET)
+    @ResponseBody
+    public Docente obtenerDatosDocente(@RequestParam int idempleado){
+        return docenteService.obtenerDatosDocentePorIdEmpleado(idempleado);
+    }
+    //Actualizar Datos administrativo
+    @RequestMapping(value = "actualizardatosdocente",method = RequestMethod.POST)
+    @ResponseBody
+    public int actualizarDatosDocente(@RequestBody Docente docente){
+        return docenteService.update(docente);
+    }
+    //Obtener Datos Laboral
+    @RequestMapping(value = "obtenerdatoslaboral",method = RequestMethod.GET)
+    @ResponseBody
+    public Datoslaboral obtenerDatosLaboral(@RequestParam int idempleado){
+        return datoslaboralService.obtenerDatosLaboralPorIdEmpleado(idempleado);
+    }
+    //Actualizar Datos Laboral
+    @RequestMapping(value = "actualizardatoslaboral",method = RequestMethod.POST)
+    @ResponseBody
+    public int actualizarDatosLaboral(@RequestBody Datoslaboral datoslaboral){
+        return datoslaboralService.update(datoslaboral);
+    }
+    
+    
     
     
         
