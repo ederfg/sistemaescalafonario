@@ -5,6 +5,7 @@
  */
 package pe.unsch.sistemaescalafonario.service;
 
+import java.util.List;
 import pe.unsch.sistemaescalafonario.entity.Datosacademicos;
 
 /**
@@ -13,4 +14,5 @@ import pe.unsch.sistemaescalafonario.entity.Datosacademicos;
  */
 public interface DatosacademicosService extends GenericService<Datosacademicos>{
     
+    List<Datosacademicos> listarDatosAcademicosPorEmpleado (int idempleado);
 }

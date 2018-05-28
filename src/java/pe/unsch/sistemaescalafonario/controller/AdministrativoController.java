@@ -24,6 +24,7 @@ import pe.unsch.sistemaescalafonario.entity.Datoslaboral;
 import pe.unsch.sistemaescalafonario.entity.Departamento;
 import pe.unsch.sistemaescalafonario.entity.Distrito;
 import pe.unsch.sistemaescalafonario.entity.Empleado;
+import pe.unsch.sistemaescalafonario.entity.Gradoacademico;
 import pe.unsch.sistemaescalafonario.entity.Provincia;
 import pe.unsch.sistemaescalafonario.service.AdministrativoService;
 import pe.unsch.sistemaescalafonario.service.DatosacademicosService;
@@ -33,6 +34,7 @@ import pe.unsch.sistemaescalafonario.service.DatoslaboralService;
 import pe.unsch.sistemaescalafonario.service.DepartamentoService;
 import pe.unsch.sistemaescalafonario.service.DistritoService;
 import pe.unsch.sistemaescalafonario.service.EmpleadoService;
+import pe.unsch.sistemaescalafonario.service.GradoacademicoService;
 import pe.unsch.sistemaescalafonario.service.ProvinciaService;
 
 /**
@@ -117,6 +119,8 @@ public class AdministrativoController {
     @Autowired
     DatosacademicosService datosacademicosService;
     @Autowired
+    GradoacademicoService gradoacademicoService;
+    @Autowired
     DatosfamiliaService datosfamiliaService;
     @Autowired
     DatoshijosService datoshijosService;
@@ -188,8 +192,15 @@ public class AdministrativoController {
     //Guardar datos academicos
      @RequestMapping(value = "guardardatosacademicos",method = RequestMethod.POST)
     @ResponseBody
-    public int guardarDatoLaboral(@RequestBody Datosacademicos datosacademicos){
+    public int guardarDatosLaboral(@RequestBody Datosacademicos datosacademicos){
         return datosacademicosService.guardar(datosacademicos);
+    }
+    
+    //Guardar grado academico
+     @RequestMapping(value = "guardargradosacademicos",method = RequestMethod.POST)
+    @ResponseBody
+    public int guardarGradoAcademico(@RequestBody Gradoacademico gradoacademico){
+        return gradoacademicoService.guardar(gradoacademico);
     }
     
     //Guardar datos familia
@@ -251,8 +262,55 @@ public class AdministrativoController {
     public int actualizarDatosLaboral(@RequestBody Datoslaboral datoslaboral){
         return datoslaboralService.update(datoslaboral);
     }
+    //Obtener Datos academicos  
+    @RequestMapping(value = "obtenerdatosacademicos",method = RequestMethod.GET)
+    @ResponseBody
+    public List<Datosacademicos> obtenerDatosAcademicos(@RequestParam int idempleado){
+        return datosacademicosService.listarDatosAcademicosPorEmpleado(idempleado);
+    }
+    //Actualizar Datos Academicos
+    @RequestMapping(value = "actualizardatosacademicos",method = RequestMethod.POST)
+    @ResponseBody
+    public int actualizarDatosAcademicos(@RequestBody Datosacademicos datosacademicos){
+        return datosacademicosService.update(datosacademicos);
+    }
+    //Obtener Grado academicos  
+    @RequestMapping(value = "obtenergradosacademicos",method = RequestMethod.GET)
+    @ResponseBody
+    public List<Gradoacademico> obtenerGradosAcademicos(@RequestParam int idempleado){
+        return gradoacademicoService.listarGradoAcademicoPorEmpleado(idempleado);
+    }
+    //Actualizar Grado Academico
+    @RequestMapping(value = "actualizargradoacademico",method = RequestMethod.POST)
+    @ResponseBody
+    public int actualizarGradosAcademicos(@RequestBody Gradoacademico gradoacademico){
+        return gradoacademicoService.update(gradoacademico);
+    }
+    //Obtener Datos Familia
+    @RequestMapping(value = "obtenerdatosfamilia",method = RequestMethod.GET)
+    @ResponseBody
+    public Datosfamilia obtenerDatosFamilia(@RequestParam int idempleado){
+        return datosfamiliaService.obtenerDatosFamiliaPorEmpleado(idempleado);
+    }
+    //Actualizar Datos Familia
+    @RequestMapping(value = "actualizardatosfamilia",method = RequestMethod.POST)
+    @ResponseBody
+    public int actualizarDatosFamilia(@RequestBody Datosfamilia datosfamilia){
+        return datosfamiliaService.update(datosfamilia);
+    }
     
-    
+    //Obtener Datos Hijo por idfamiila
+    @RequestMapping(value = "obtenerdatoshijos",method = RequestMethod.GET)
+    @ResponseBody
+    public List<Datoshijos> obtenerDatosHijosPorFamilia(@RequestParam int idfamilia){
+        return datoshijosService.listarDatosHijosPorFamilia(idfamilia);
+    }
+     //Actualizar Datos Familia
+    @RequestMapping(value = "actualizardatoshijos",method = RequestMethod.POST)
+    @ResponseBody
+    public int actualizarDatosFamilia(@RequestBody Datoshijos datoshijos){
+        return datoshijosService.update(datoshijos);
+    }
     
     
     

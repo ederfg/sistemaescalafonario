@@ -5,6 +5,7 @@
  */
 package pe.unsch.sistemaescalafonario.service;
 
+import java.util.List;
 import pe.unsch.sistemaescalafonario.entity.Datoshijos;
 
 /**
@@ -12,5 +13,5 @@ import pe.unsch.sistemaescalafonario.entity.Datoshijos;
  * @author José
  */
 public interface DatoshijosService extends GenericService<Datoshijos>{
-    
+     List<Datoshijos> listarDatosHijosPorFamilia (int idfamilia);
 }

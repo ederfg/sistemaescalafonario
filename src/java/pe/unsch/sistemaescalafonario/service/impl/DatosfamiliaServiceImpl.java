@@ -5,7 +5,9 @@
  */
 package pe.unsch.sistemaescalafonario.service.impl;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pe.unsch.sistemaescalafonario.dao.DatosfamiliaDao;
 import pe.unsch.sistemaescalafonario.entity.Datosfamilia;
 import pe.unsch.sistemaescalafonario.service.DatosfamiliaService;
 
@@ -16,5 +18,12 @@ import pe.unsch.sistemaescalafonario.service.DatosfamiliaService;
 
 @Service
 public class DatosfamiliaServiceImpl extends GenericServiceImpl<Datosfamilia> implements DatosfamiliaService {
+    @Autowired
+    DatosfamiliaDao datosfamiliaDao;
+    
+    @Override
+    public Datosfamilia obtenerDatosFamiliaPorEmpleado(int idempleado) {
+        return (Datosfamilia) datosfamiliaDao.consultUnique("from Datosfamilia d where empleado.id="+idempleado);
+    }
     
 }

@@ -23,13 +23,16 @@
     <button class="btn btn-primary" ng-click="mostrarDatosPersonales()">Modificar Datos Personales</button>
     <button class="btn btn-success" ng-click="mostrarDatosAdministrativo()">Modificar Datos Administrativo</button>
     <button class="btn btn-warning" ng-click="mostrarDatosLaboral()">Modificar Datos Laboral</button>
+    <button class="btn btn-danger" ng-click="mostrarDatosAcademicos()">Modificar Datos Académicos</button>
+    <button class="btn btn-info" ng-click="mostrarGradosAcademicos()">Modificar Grados Académicos</button>
+    <button class="btn btn-dark" ng-click="mostrarDatosFamilia()">Modificar Datos familia</button>
 </div>
 
 
 
 
 
-<!-- Modal agregar Nivel Educativo -->
+<!-- Modal Datos Laboral -->
 <div class="modal fade" id="modalDatosLaboral" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabelA" aria-hidden="true">
     <div class=" modal-dialog modal-lg" role="document">
         <div class="modal-content">
@@ -100,7 +103,7 @@
                                 Por favor selecciona el tipo de cese.
                             </div>
                         </div>
-                        
+
 
                     </div>   
 
@@ -130,7 +133,7 @@
                                 Por favor selecciona una condicion. 
                             </div>
                         </div> 
-                        
+
                         <div class="col-md-4 mb-3">
                             <label for="fechaCese">Fecha de Cese</label>
                             <input type="date" class="form-control" ng-model="datoslaboral.fechacese" id="fechaCese" placeholder="" value="" >
@@ -149,7 +152,6 @@
         </div>
     </div>
 </div>
-
 
 
 <!-- Modal Para Datos personales  -->
@@ -397,7 +399,6 @@
 </div>
 
 
-
 <!-- Modal datos administrativo -->
 <div class="modal fade" id="modalDatosAdministrativo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class=" modal-dialog modal-lg" role="document">
@@ -444,6 +445,250 @@
                             </div>
                         </div> 
 
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal datos academicos -->
+<div class="modal fade" id="modalDatosAcademicos" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class=" modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Datos académicos</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body modal-lg">
+                <form ng-submit="actualizarDatosAcademicos(listadoDatosAcademicos)">
+                    <div class="form-row">
+
+                        <table class="table table-responsive" border="1">
+                            <thead>
+                                <tr>
+                                    <th>Grado instruccion</th>
+                                    <th>Condicion</th>
+                                    <th>Nombre institucion</th>
+                                    <th>Año egreso</th>
+                                    <th>Especialidad</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="datoacademico in listadoDatosAcademicos| orderBy: 'id'">
+                                    <td>
+                                        <select class="form-control" ng-model="datoacademico.gradoinstruccion" id="vive" placeholder="" style="width: 150px" required>
+                                            <option value="">Nivel Educativo...</option>
+                                            <option>Primaria</option>
+                                            <option>Secundaria</option>
+                                            <option>Tecnico</option>
+                                            <option>Superior</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select class="form-control" ng-model="datoacademico.condicion" id="vive" placeholder="" style="width: 130px" required>
+                                            <option value="">Condicion...</option>
+                                            <option>Incompleta</option>
+                                            <option>Completa</option>
+                                            <option>Egresado</option>
+                                            <option>Titulado</option>
+                                        </select>
+                                    </td>
+                                    <td><input class="form-control" type="text" ng-model="datoacademico.nombreinstitucion"></td>
+                                    <td><input class="form-control" type="text" ng-model="datoacademico.anioegreso" style="width: 80px"></td>
+                                    <td><input class="form-control" type="text" ng-model="datoacademico.especialidad"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal grado academicos -->
+<div class="modal fade" id="modalGradosAcademicos" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class=" modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Datos académicos</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body modal-lg">
+                <form ng-submit="actualizarGradosAcademicos(listadoGradosAcademicos)">
+                    <div class="form-row">
+
+                        <table class="table table-responsive" border="1">
+                            <thead>
+                                <tr>
+                                    <th>Grado</th>
+                                    <th>Condición</th>
+                                    <th>Nombre institucion</th>
+                                    <th>Fecha conclusion</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="gradoacademico in listadoGradosAcademicos| orderBy: 'id'">
+                                    <td>
+                                        <select class="form-control" id="vive" placeholder="" ng-model="gradoacademico.grado" required>
+                                            <option value="">Grado...</option>
+                                            <option>Bachiller</option>
+                                            <option>Maestria</option>
+                                            <option>Doctorado</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select class="form-control" id="vive" placeholder="" ng-model="gradoacademico.condicion" required>
+                                            <option value="">Condicion...</option>
+                                            <option>Incompleta</option>
+                                            <option>Egresado</option>
+                                            <option>Titulado</option>
+                                        </select>
+                                    </td>
+                                    <td><input class="form-control" type="text" ng-model="gradoacademico.nombreinstitucion"></td>
+                                    <td><input class="form-control" type="text" ng-model="gradoacademico.fechaconclusion" style="width: 80px"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal datos familia -->
+<div class="modal fade" id="modalDatosFamilia" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class=" modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Datos Familiares</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body modal-lg">
+                <form ng-submit="actualizarDatosFamilia(datosfamilia,listadodatoshijos)">
+                    <div class="form">
+
+                        <div class="row">
+                            <div class="col-md-4 mb-3">
+                                <label for="apPatCony">Ap. Paterno Conyugue</label>
+                                <input ng-model="datosfamilia.appatconyugue" type="text" class="form-control" id="apPatCony" placeholder="" value="" required>
+                                <div class="invalid-feedback">
+                                    Es necesario ingresar el apellido paterno del conyugue.
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="apMatCony">Ap. Materno Conyugue</label>
+                                <input ng-model="datosfamilia.apmatconyugue" type="text" class="form-control" id="apMatCony" placeholder="" value="" required>
+                                <div class="invalid-feedback">
+                                    Es necesario ingresar el apellido materno del conyugue.
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="nombCony">Nombres Conyugue</label>
+                                <input ng-model="datosfamilia.nombresconyugue" type="text" class="form-control" id="nombCony" placeholder="" value="" required>
+                                <div class="invalid-feedback">
+                                    Es necesario ingresar el nombre del conyugue.
+                                </div>
+                            </div>  
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-3 mb-3">
+                                <label for="dnicony">DNI Conyugue N°</label>
+                                <input ng-model="datosfamilia.dniconyugue" maxlength="8" type="text" class="form-control" id="dnicony" placeholder="" value="" required>
+                                <div class="invalid-feedback">
+                                    Ingrese el DNI del conyugue.
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="fechaNacCony">Fecha de Nac. Conyugue</label>
+                                <input ng-model="datosfamilia.fechanacimiconyugue" type="date" class="form-control" id="fechaNacCony" placeholder="" value="" required>
+                                <div class="invalid-feedback">
+                                    Ingrese la fecha de nacimineto del conyugue.
+                                </div>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label for="CelularCony">Celular</label>
+                                <input ng-model="datosfamilia.celularconyugue" type="text" class="form-control" id="CelularCony" placeholder="" value="" required>
+                                <div class="invalid-feedback">
+                                    Ingrese el numero de celular.
+                                </div>
+                            </div> 
+                        </div>
+                        <h4>En caso de emergencia:</h4>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="ruc">Nombre de emergencia</label>
+                                <input ng-model="datosfamilia.nombreemergencia" type="text" class="form-control" id="ruc" placeholder="" value="" required>
+                                <div class="invalid-feedback">
+                                    Por favor ingrese el nombre de emergencia
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label for="ruc">Celular de emergencia</label>
+                                <input ng-model="datosfamilia.celularemergencia" type="text" class="form-control" id="ruc" placeholder="" value="" required>
+                                <div class="invalid-feedback">
+                                    Por favor ingrese el celular de emergencia
+                                </div>
+                            </div>
+                        </div>
+
+                        <h4>Datos Hijos:</h4>
+                        <table class="table table-responsive" border="1">
+                            <thead>
+                                <tr>
+                                    <th>DNI</th>
+                                    <th>AP. PATERNO</th>
+                                    <th>AP. MATERNO</th>
+                                    <th>NOMBRES</th>
+                                    <th>FECHA NACIMIENTO</th>
+                                    <th>SEXO</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="datohijo in listadodatoshijos| orderBy: 'id'">
+                                    <td><input class="form-control" type="text" ng-model="datohijo.dnihijo"></td>
+                                    <td><input class="form-control" type="text" ng-model="datohijo.appathijo"></td>
+                                    <td><input class="form-control" type="text" ng-model="datohijo.apmathijo"></td>
+                                    <td><input class="form-control" type="text" ng-model="datohijo.nombreshijo"></td>
+                                    <td><input class="form-control" type="date" ng-model="datohijo.fechanachijo"></td>
+                                    <td>
+                                        <select class="form-control" id="vive" placeholder="" ng-model="datohijo.sexo" required style="width: 65px">
+                                            <option value="">Sexo...</option>
+                                            <option>M</option>
+                                            <option>F</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>

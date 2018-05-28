@@ -12,5 +12,5 @@ import pe.unsch.sistemaescalafonario.entity.Datosfamilia;
  * @author José
  */
 public interface DatosfamiliaService extends GenericService<Datosfamilia>{
-    
+     Datosfamilia obtenerDatosFamiliaPorEmpleado (int idempleado);
 }

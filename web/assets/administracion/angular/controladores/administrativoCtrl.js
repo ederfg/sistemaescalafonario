@@ -33,7 +33,9 @@ appAdmin.controller('administrativoregistroCtrl', ['$scope', 'AdministrativoServ
         $scope.empleados = [];
 
         $scope.listadatosacademicos = [];
+        $scope.listagradosacademicos = [];
         $scope.datoacademico = {};
+        $scope.gradoacademico = {};
 
         $scope.listadatoshijos = [];
         $scope.datohijo = {};
@@ -55,15 +57,20 @@ appAdmin.controller('administrativoregistroCtrl', ['$scope', 'AdministrativoServ
         };
 
         //aqui guardamos emplead,admnistr,datoslaboral,etc.
-        $scope.guardarTodoAdministrativo = function (empleado, administrativo, datoslaboral, listadatosacademicos, datosfamilia, listadatoshijos) {
-            AdministrativoServ.guardarTodoAdministrativo(empleado, administrativo, datoslaboral, listadatosacademicos, datosfamilia, listadatoshijos).then(function () {
+        $scope.guardarTodoAdministrativo = function (empleado, administrativo, datoslaboral, listadatosacademicos, listagradosacademicos, datosfamilia, listadatoshijos) {
+            AdministrativoServ.guardarTodoAdministrativo(empleado, administrativo, datoslaboral, listadatosacademicos, listagradosacademicos, datosfamilia, listadatoshijos).then(function () {
             });
         };
 
-        //agregar a listadodatosacademicos
+        //agregar a listadodatosacademicos   
         $scope.agregardatoacademico = function (datoacademico) {
             $scope.listadatosacademicos.push(datoacademico);
             $scope.datoacademico = {};
+        };
+
+        $scope.agregargradoacademico = function (gradoacademico) {
+            $scope.listagradosacademicos.push(gradoacademico);
+            $scope.gradoacademico = {};
         };
 
         //agregar a listadodatoshijos
@@ -138,11 +145,11 @@ appAdmin.controller('administrativomodificarCtrl', ['$scope', '$routeParams', 'A
                 }
             });
         };
-        
+
         //Datos Laboral
         $scope.mostrarDatosLaboral = function () {
             $("#modalDatosLaboral").modal();
-           AdministrativoServ.obtenerDatosLaboral($scope.idempleado).then(function (respuesta) {
+            AdministrativoServ.obtenerDatosLaboral($scope.idempleado).then(function (respuesta) {
                 $scope.datoslaboral = respuesta;
                 $scope.datoslaboral.fechaingresoinst = new Date(respuesta.fechaingresoinst); //Para dar formato
                 $scope.datoslaboral.fechacese = new Date(respuesta.fechacese); //Para dar formato
@@ -156,6 +163,64 @@ appAdmin.controller('administrativomodificarCtrl', ['$scope', '$routeParams', 'A
             });
         };
 
+        //Datos academicos
+        $scope.listadoDatosAcademicos = [];
+        $scope.mostrarDatosAcademicos = function () {
+            $("#modalDatosAcademicos").modal();
+            AdministrativoServ.obtenerDatosAcademicos($scope.idempleado).then(function (respuesta) {
+                $scope.listadoDatosAcademicos = respuesta;
+            });
+        };
+        $scope.actualizarDatosAcademicos = function (listadoDatosAcademicos) {
+            for (var i = 0; i < listadoDatosAcademicos.length; i++) {
+                AdministrativoServ.actualizarDatosAcademicos(listadoDatosAcademicos[i]).then(function (respuesta) {
+                });
+            }
+            $("#modalDatosAcademicos").modal('hide');
+        };
+
+        //Datos academicos
+        $scope.listadoGradosAcademicos = [];
+        $scope.mostrarGradosAcademicos = function () {
+            $("#modalGradosAcademicos").modal();
+            AdministrativoServ.obtenerGradosAcademicos($scope.idempleado).then(function (respuesta) {
+                $scope.listadoGradosAcademicos = respuesta;
+            });
+        };
+        $scope.actualizarGradosAcademicos = function (listadoGradosAcademicos) {
+            for (var i = 0; i < listadoGradosAcademicos.length; i++) {
+                AdministrativoServ.actualizarGradoAcademico(listadoGradosAcademicos[i]).then(function (respuesta) {
+                });
+            }
+            $("#modalGradosAcademicos").modal('hide');
+        };
+
+        //Datos familia
+        $scope.datosfamilia = {};
+        $scope.listadodatoshijos = [];
+        $scope.mostrarDatosFamilia = function () {
+            $("#modalDatosFamilia").modal();
+            AdministrativoServ.obtenerDatosFamilia($scope.idempleado).then(function (respuestadf) {
+                $scope.datosfamilia = respuestadf;
+                $scope.datosfamilia.fechanacimiconyugue = new Date(respuestadf.fechanacimiconyugue); //Para dar formato
+                AdministrativoServ.obtenerDatosHijos($scope.datosfamilia.id).then(function (respuestadfh) {
+                    $scope.listadodatoshijos = respuestadfh;
+                    for (var i = 0; i < respuestadfh.length; i++) {
+                         $scope.listadodatoshijos[i].fechanachijo = new Date(respuestadfh[i].fechanachijo);
+                    }
+                });
+            });
+        };
+        
+        $scope.actualizarDatosFamilia = function (datosfamilia,listadodatoshijos) {
+            AdministrativoServ.actualizarDatosFamilia(datosfamilia).then(function (respuesta) {
+            });
+            for (var i = 0; i < listadodatoshijos.length; i++) {
+                AdministrativoServ.actualizarDatosHijos(listadodatoshijos[i]).then(function (respuesta) {
+                });
+            }
+            $("#modalDatosFamilia").modal('hide');
+        };
 
 
         console.log("AQUI ESTA EL FORMULARIO DE MODIFICAR ADMINISTRATIVOS");

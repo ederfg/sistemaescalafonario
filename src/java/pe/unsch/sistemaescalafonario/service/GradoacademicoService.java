@@ -5,6 +5,7 @@
  */
 package pe.unsch.sistemaescalafonario.service;
 
+import java.util.List;
 import pe.unsch.sistemaescalafonario.entity.Gradoacademico;
 
 /**
@@ -12,5 +13,5 @@ import pe.unsch.sistemaescalafonario.entity.Gradoacademico;
  * @author José
  */
 public interface GradoacademicoService extends GenericService<Gradoacademico>{
-    
+    List<Gradoacademico> listarGradoAcademicoPorEmpleado (int idempleado);
 }
