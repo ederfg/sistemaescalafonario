@@ -160,8 +160,64 @@ appAdmin.controller('docentemodificarCtrl', ['$scope', '$routeParams', 'DocenteS
             });
         };
         
+        //Datos academicos
+        $scope.listadoDatosAcademicos = [];
+        $scope.mostrarDatosAcademicos = function () {
+            $("#modalDatosAcademicos").modal();
+            DocenteServ.obtenerDatosAcademicos($scope.idempleado).then(function (respuesta) {
+                $scope.listadoDatosAcademicos = respuesta;
+            });
+        };
+        $scope.actualizarDatosAcademicos = function (listadoDatosAcademicos) {
+            for (var i = 0; i < listadoDatosAcademicos.length; i++) {
+                DocenteServ.actualizarDatosAcademicos(listadoDatosAcademicos[i]).then(function (respuesta) {
+                });
+            }
+            $("#modalDatosAcademicos").modal('hide');
+        };
         
+        //Grado academicos
+        $scope.listadoGradosAcademicos = [];
+        $scope.mostrarGradosAcademicos = function () {
+            $("#modalGradosAcademicos").modal();
+            DocenteServ.obtenerGradosAcademicos($scope.idempleado).then(function (respuesta) {
+                $scope.listadoGradosAcademicos = respuesta;
+            });
+        };
+        $scope.actualizarGradosAcademicos = function (listadoGradosAcademicos) {
+            for (var i = 0; i < listadoGradosAcademicos.length; i++) {
+                DocenteServ.actualizarGradoAcademico(listadoGradosAcademicos[i]).then(function (respuesta) {
+                });
+            }
+            $("#modalGradosAcademicos").modal('hide');
+        };
         
+        //Datos familia
+        $scope.datosfamilia = {};
+        $scope.listadodatoshijos = [];
+        $scope.mostrarDatosFamilia = function () {
+            $("#modalDatosFamilia").modal();
+            DocenteServ.obtenerDatosFamilia($scope.idempleado).then(function (respuestadf) {
+                $scope.datosfamilia = respuestadf;
+                $scope.datosfamilia.fechanacimiconyugue = new Date(respuestadf.fechanacimiconyugue); //Para dar formato
+                DocenteServ.obtenerDatosHijos($scope.datosfamilia.id).then(function (respuestadfh) {
+                    $scope.listadodatoshijos = respuestadfh;
+                    for (var i = 0; i < respuestadfh.length; i++) {
+                         $scope.listadodatoshijos[i].fechanachijo = new Date(respuestadfh[i].fechanachijo);
+                    }
+                });
+            });
+        };
+        
+        $scope.actualizarDatosFamilia = function (datosfamilia,listadodatoshijos) {
+            DocenteServ.actualizarDatosFamilia(datosfamilia).then(function (respuesta) {
+            });
+            for (var i = 0; i < listadodatoshijos.length; i++) {
+                DocenteServ.actualizarDatosHijos(listadodatoshijos[i]).then(function (respuesta) {
+                });
+            }
+            $("#modalDatosFamilia").modal('hide');
+        };
         
 
         console.log("AQUI ESTA EL FORMULARIO DE MODIFICAR DOCENTES");

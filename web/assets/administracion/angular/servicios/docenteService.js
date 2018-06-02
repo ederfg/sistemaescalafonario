@@ -239,7 +239,87 @@ appPersonal.factory('DocenteServ', ['$http', '$q', function ($http, $q) {
                             d.resolve(respuesta);
                         });
                 return d.promise;    
+            },
+            obtenerDatosAcademicos: function (idempleado) {
+                var d = $q.defer();
+                $http.get('/sistemaescalafonario/docente/obtenerdatosacademicos?idempleado='+idempleado)
+                        .success(function (respuesta) {
+                            console.log(respuesta);
+                            //self.empleados = respuesta;
+                            d.resolve(respuesta);
+                        });
+                return d.promise;    
+            },
+            actualizarDatosAcademicos: function (datosacademicos) {
+                var d = $q.defer();
+                $http.post('/sistemaescalafonario/docente/actualizardatosacademicos',datosacademicos)
+                        .success(function (respuesta) {
+                            console.log(respuesta);
+                            d.resolve(respuesta);
+                        });
+                return d.promise;    
+            },
+            obtenerGradosAcademicos: function (idempleado) {
+                var d = $q.defer();
+                $http.get('/sistemaescalafonario/docente/obtenergradosacademicos?idempleado='+idempleado)
+                        .success(function (respuesta) {
+                            console.log(respuesta);
+                            //self.empleados = respuesta;
+                            d.resolve(respuesta);
+                        });
+                return d.promise;    
+            },
+            actualizarGradoAcademico: function (gradoacademico) {
+                var d = $q.defer();
+                $http.post('/sistemaescalafonario/docente/actualizargradoacademico',gradoacademico)
+                        .success(function (respuesta) {
+                            console.log(respuesta);
+                            d.resolve(respuesta);
+                        });
+                return d.promise;    
+            },
+            obtenerDatosFamilia: function (idempleado) {
+                var d = $q.defer();
+                $http.get('/sistemaescalafonario/docente/obtenerdatosfamilia?idempleado='+idempleado)
+                        .success(function (respuesta) {
+                            console.log(respuesta);
+                            //self.empleados = respuesta;
+                            d.resolve(respuesta);
+                        });
+                return d.promise;    
+            },
+            actualizarDatosFamilia: function (datosfamilia) {
+                var d = $q.defer();
+                $http.post('/sistemaescalafonario/docente/actualizardatosfamilia',datosfamilia)
+                        .success(function (respuesta) {
+                            console.log(respuesta);
+                            //self.empleados = respuesta;
+                            d.resolve(respuesta);
+                        });
+                return d.promise;    
+            },
+            obtenerDatosHijos: function (idfamilia) {
+                var d = $q.defer();
+                $http.get('/sistemaescalafonario/docente/obtenerdatoshijos?idfamilia='+idfamilia)
+                        .success(function (respuesta) {
+                            console.log(respuesta);
+                            //self.empleados = respuesta;
+                            d.resolve(respuesta);
+                        });
+                return d.promise;    
+            },
+            actualizarDatosHijos: function (datoshijos) {
+                var d = $q.defer();
+                $http.post('/sistemaescalafonario/docente/actualizardatoshijos',datoshijos)
+                        .success(function (respuesta) {
+                            console.log(respuesta);
+                            //self.empleados = respuesta;
+                            d.resolve(respuesta);
+                        });
+                return d.promise;    
             }
+            
+            
 
         };
         return self;
