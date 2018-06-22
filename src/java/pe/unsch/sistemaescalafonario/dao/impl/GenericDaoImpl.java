@@ -135,4 +135,23 @@ public abstract class GenericDaoImpl<T> implements GenericDao<T> {
         return objeto;
     }
 
+     @Override
+    public int drop(int id) {
+        Session sesion = sesionFactory.openSession();
+        sesion.beginTransaction().commit();
+
+        Query query = sesion.createQuery("delete from " + type.getName() + " x where x.id=" + id);
+
+        int r = 0;
+        try {
+            r = query.executeUpdate();
+        } catch (Exception e) {
+            System.out.println(" " + e.getMessage());
+        } finally {
+            sesion.close();
+        }
+
+        return r;
+    }
+
 }

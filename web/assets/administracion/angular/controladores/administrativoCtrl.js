@@ -9,17 +9,238 @@ var appAdmin = angular.module('personalApp.administrativoControler', []);
 
 ///
 
-appAdmin.controller('mantenimientoadministrativoCtrl', ['$scope', 'AdministrativoServ', function ($scope, AdministrativoServ) {
+appAdmin.controller('mantenimientoadministrativoCtrl', ['$scope', 'AdministrativoServ', '$timeout', function ($scope, AdministrativoServ, $timeout) {
 
 
 
         $scope.administrativos = [];
 
+        $scope.empleado = {};
+        $scope.administrativo = {};
+        $scope.datoslaboral = {};
+        $scope.listadoDatosAcademicos = [];
+        $scope.listadoGradosAcademicos = [];
+        $scope.datosfamilia = {};
+        $scope.listadodatoshijos = [];
 
 
-        AdministrativoServ.listarAdministrativo().then(function () {
-            $scope.administrativos = AdministrativoServ.administrativos;
-        });
+        $scope.listarAdministrativo = function () {
+            AdministrativoServ.listarAdministrativo().then(function () {
+                $scope.administrativos = AdministrativoServ.administrativos;
+            });
+        };
+        $scope.listarAdministrativo();
+
+
+        $scope.verDetalleAdministrativo = function (idempleado) {
+            console.log("El id del empleado es: " + idempleado);
+            // DATOS PERSONALES
+            AdministrativoServ.obtenerDatosPersonales(idempleado).then(function (respuesta) {
+                $scope.empleado = respuesta;
+
+                if (respuesta.mayoringreso === true) {
+                    $scope.empleado.mayoringreso = 'SI';
+                } else {
+                    $scope.empleado.mayoringreso = 'NO';
+                }
+
+                if (respuesta.afiliacionsindicato === true) {
+                    $scope.empleado.afiliacionsindicato = 'SI';
+                } else {
+                    $scope.empleado.afiliacionsindicato = 'NO';
+                }
+            });
+            //DATOS ADMINISTRATIVO
+            AdministrativoServ.obtenerDatosAdministrativo(idempleado).then(function (respuesta) {
+                $scope.administrativo = respuesta;
+            });
+            //DATOS LABORAL
+            AdministrativoServ.obtenerDatosLaboral(idempleado).then(function (respuesta) {
+                $scope.datoslaboral = respuesta;
+            });
+            //DATOS ACADEMICOS
+            AdministrativoServ.obtenerDatosAcademicos(idempleado).then(function (respuesta) {
+                $scope.listadoDatosAcademicos = respuesta;
+            });
+            //GRADOS ACADEMICOS
+            AdministrativoServ.obtenerGradosAcademicos(idempleado).then(function (respuesta) {
+                $scope.listadoGradosAcademicos = respuesta;
+            });
+            //DATOS FAMILIA
+            AdministrativoServ.obtenerDatosFamilia(idempleado).then(function (respuestadf) {
+                $scope.datosfamilia = respuestadf;
+                AdministrativoServ.obtenerDatosHijos($scope.datosfamilia.id).then(function (respuestadfh) {
+                    $scope.listadodatoshijos = respuestadfh;
+                    for (var i = 0; i < respuestadfh.length; i++) {
+                        $scope.listadodatoshijos[i].fechanachijo = new Date(respuestadfh[i].fechanachijo);
+                    }
+                });
+            });
+
+        };
+
+
+        $scope.eliminarAdministrativo = function (idempleado) {
+            swal({
+                title: "Estas seguro de eliminar el Administrativo?",
+                text: "texto alternativo",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true
+            })
+                    .then((willDelete) => {
+                        if (willDelete) {
+                            /*Llegamos aquí si hace clic en Ok*/
+                    
+                            
+                    
+                            $timeout(function () {
+                                console.log("entra timeout");
+                                AdministrativoServ.eliminarEmpleado(idempleado).then(function (respuesta) {
+                                    if (respuesta === 1) {
+                                        swal("Eliminado correctamente!", "...", "success");
+                                    } else {
+                                        swal("Ocurrió un error al aliminar!", "...", "error");
+                                    }
+                                });
+                            }, 3000);
+
+                            //Eliminando administrativo
+                            AdministrativoServ.obtenerDatosAdministrativo(idempleado).then(function (respuesta) {
+                                $scope.administrativo = respuesta;
+                                console.log($scope.administrativo);
+                                if ($scope.administrativo !== '') {
+                                    //console.log("dentro del if "+$scope.administrativo);
+                                    AdministrativoServ.eliminarAdministrativo($scope.administrativo.id).then(function (respuesta) {
+                                        console.log("dentro del servicio");
+                                        if (respuesta === 1) {
+                                            console.log("Se elimino el administrativo del idempleado: " + idempleado);
+                                            $scope.listarAdministrativo();
+                                        } else {
+                                            console.log("No se elimino el administrativo");
+                                        }
+                                    });
+                                } else {
+                                    console.log("No existe registro de adminsitrativo para el idempleado: " + idempleado);
+                                }
+                            });
+
+                            //Eliminando Datos laboral tenga o no tenga
+                            AdministrativoServ.obtenerDatosLaboral(idempleado).then(function (respuesta) {
+                                $scope.datoslaboral = respuesta;
+                                if ($scope.datoslaboral !== '') {
+                                    console.log("entra");
+                                    AdministrativoServ.eliminarDatosLaboral(respuesta.id).then(function (respuesta) {
+                                        if (respuesta === 1) {
+                                            console.log("Se elimino los datos laboral del idempleado: " + idempleado);
+                                            $scope.listarAdministrativo();
+                                        } else {
+                                            console.log("No se elimino el dato laboral");
+                                        }
+                                    });
+                                } else {
+                                    console.log("No existe registro del dato laboral para el idempleado: " + idempleado);
+                                }
+                            });
+
+                            //Eliminando Datos academicos
+                            AdministrativoServ.obtenerDatosAcademicos(idempleado).then(function (respuesta) {
+                                $scope.listadoDatosAcademicos = respuesta;
+                                if ($scope.listadoDatosAcademicos !== []) {
+                                    for (var i = 0; i < $scope.listadoDatosAcademicos.length; i++) {
+                                        AdministrativoServ.eliminarDatoAcademico($scope.listadoDatosAcademicos[i].id).then(function (respuesta) {
+                                            if (respuesta === 1) {
+                                                console.log("Se elimino dato academico del empleado: " + idempleado);
+                                                $scope.listarAdministrativo();
+                                            } else {
+                                                console.log("No se elimino el dato academico");
+                                            }
+                                        });
+                                    }
+                                } else {
+                                    console.log("No existe registro del datos academicos para el idempleado: " + idempleado);
+                                }
+                            });
+
+
+                            //Eliminando Grado academicos
+                            AdministrativoServ.obtenerGradosAcademicos(idempleado).then(function (respuesta) {
+                                $scope.listadoGradosAcademicos = respuesta;
+                                if ($scope.listadoGradosAcademicos !== []) {
+                                    for (var i = 0; i < $scope.listadoGradosAcademicos.length; i++) {
+                                        AdministrativoServ.eliminarGradoAcademico($scope.listadoGradosAcademicos[i].id).then(function (respuesta) {
+                                            if (respuesta === 1) {
+                                                console.log("Se elimino grado academico del empleado: " + idempleado);
+                                                $scope.listarAdministrativo();
+                                            } else {
+                                                console.log("No se elimino el grado academico");
+                                            }
+                                        });
+                                    }
+                                } else {
+                                    console.log("No existe registro del grados academicos para el idempleado: " + idempleado);
+                                }
+                            });
+
+
+
+
+                            //Eliminando Familia y Datos hijos
+                            AdministrativoServ.obtenerDatosFamilia(idempleado).then(function (respuesta) {
+                                $scope.datosfamilia = respuesta;
+                                if ($scope.datosfamilia !== '') {
+                                    AdministrativoServ.obtenerDatosHijos($scope.datosfamilia.id).then(function (respuestadfh) {
+                                        $scope.listadodatoshijos = respuestadfh;
+                                        for (var i = 0; i < $scope.listadodatoshijos.length; i++) {
+                                            AdministrativoServ.eliminarDatoHijo($scope.listadodatoshijos[i].id).then(function (respuesta) {
+                                                if (respuesta === 1) {
+                                                    console.log("Se elimino el hijo de la familia: " + $scope.datosfamilia.id);
+                                                    console.log(i);
+                                                    console.log($scope.listadodatoshijos.length);
+                                                    if (i === $scope.listadodatoshijos.length) {
+                                                        AdministrativoServ.eliminarFamilia($scope.datosfamilia.id).then(function (respuesta) {
+                                                            if (respuesta === 1) {
+                                                                console.log("Se elimino la familia del empleado: " + idempleado);
+                                                                $scope.listarAdministrativo();
+                                                            } else {
+                                                                console.log("No se elimino la familia");
+                                                            }
+                                                        });
+                                                    }
+                                                    $scope.listarAdministrativo();
+                                                } else {
+                                                    console.log("No se elimino el hijo");
+                                                }
+                                            });
+                                        }
+                                    });
+                                } else {
+                                    console.log("No existe registro de la familia del empleado: " + idempleado);
+                                }
+                            });
+                            
+
+
+
+
+
+                            /*  AdministrativoServ.eliminarTodoAdministrativo(idempleado).then(function (respuesta) {
+                             if (respuesta === 1) {
+                             swal("Se elimino correctamente", {
+                             icon: "success"
+                             });
+                             }
+                             });*/
+
+                        } else {
+
+                        }
+                    });
+
+
+
+        };
+
 
         console.log("ADMINISTRATIVO CONTROLLER");
     }]);
@@ -206,13 +427,13 @@ appAdmin.controller('administrativomodificarCtrl', ['$scope', '$routeParams', 'A
                 AdministrativoServ.obtenerDatosHijos($scope.datosfamilia.id).then(function (respuestadfh) {
                     $scope.listadodatoshijos = respuestadfh;
                     for (var i = 0; i < respuestadfh.length; i++) {
-                         $scope.listadodatoshijos[i].fechanachijo = new Date(respuestadfh[i].fechanachijo);
+                        $scope.listadodatoshijos[i].fechanachijo = new Date(respuestadfh[i].fechanachijo);
                     }
                 });
             });
         };
-        
-        $scope.actualizarDatosFamilia = function (datosfamilia,listadodatoshijos) {
+
+        $scope.actualizarDatosFamilia = function (datosfamilia, listadodatoshijos) {
             AdministrativoServ.actualizarDatosFamilia(datosfamilia).then(function (respuesta) {
             });
             for (var i = 0; i < listadodatoshijos.length; i++) {
@@ -221,6 +442,8 @@ appAdmin.controller('administrativomodificarCtrl', ['$scope', '$routeParams', 'A
             }
             $("#modalDatosFamilia").modal('hide');
         };
+
+
 
 
         console.log("AQUI ESTA EL FORMULARIO DE MODIFICAR ADMINISTRATIVOS");

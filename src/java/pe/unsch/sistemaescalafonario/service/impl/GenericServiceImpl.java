@@ -41,4 +41,9 @@ public abstract class GenericServiceImpl<T> implements GenericService<T>{
     public int update(T t) {
         return genericDao.update(t);
     }
+
+    @Override
+    public int drop(int id) {
+        return genericDao.drop(id);
+    }
 }

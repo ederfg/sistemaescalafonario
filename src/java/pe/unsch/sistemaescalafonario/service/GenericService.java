@@ -22,5 +22,8 @@ public interface GenericService<T> {
     
     int update(T t);
     
+    int drop(int id);
+    
+    
 }
 

@@ -26,5 +26,7 @@ public interface GenericDao<T> {
     T get (int id);
     
     int update(T t);
+    
+     int drop(int id);
 
 }
