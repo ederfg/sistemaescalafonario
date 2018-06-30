@@ -24,6 +24,7 @@ import pe.unsch.sistemaescalafonario.entity.Datoslaboral;
 import pe.unsch.sistemaescalafonario.entity.Departamento;
 import pe.unsch.sistemaescalafonario.entity.Distrito;
 import pe.unsch.sistemaescalafonario.entity.Empleado;
+import pe.unsch.sistemaescalafonario.entity.Escalafon;
 import pe.unsch.sistemaescalafonario.entity.Gradoacademico;
 import pe.unsch.sistemaescalafonario.entity.Provincia;
 import pe.unsch.sistemaescalafonario.service.AdministrativoService;
@@ -34,6 +35,7 @@ import pe.unsch.sistemaescalafonario.service.DatoslaboralService;
 import pe.unsch.sistemaescalafonario.service.DepartamentoService;
 import pe.unsch.sistemaescalafonario.service.DistritoService;
 import pe.unsch.sistemaescalafonario.service.EmpleadoService;
+import pe.unsch.sistemaescalafonario.service.EscalafonService;
 import pe.unsch.sistemaescalafonario.service.GradoacademicoService;
 import pe.unsch.sistemaescalafonario.service.ProvinciaService;
 
@@ -121,6 +123,9 @@ public class AdministrativoController {
     @Autowired
     DatoshijosService datoshijosService;
 
+    @Autowired
+    EscalafonService escalafonService;
+    
     @RequestMapping(value = "listadoadministrativos", method = RequestMethod.GET)
     @ResponseBody
     public String listadoAdm() {
@@ -364,6 +369,21 @@ public class AdministrativoController {
     }
 
     /*------------------------------*/
+    
+    /*--------------REGISTRO ESCALAFON ADM-------------*/
+    @RequestMapping(value = "agregarescalafon", method = RequestMethod.POST)
+    @ResponseBody
+    public int agregarEscalafon(@RequestBody Escalafon escalafon) {
+        return escalafonService.guardar(escalafon);
+    }
+    
+    /*Listado escalafon adm*/
+    @RequestMapping(value = "listarescalafonadm", method = RequestMethod.GET)
+    @ResponseBody
+    public List<Escalafon> listarEscalafonAdm(@RequestParam int idempleado) {
+        return escalafonService.listarEscalafonPorEmpleado(idempleado);
+    }
+    
 
 
     //listar empleado   

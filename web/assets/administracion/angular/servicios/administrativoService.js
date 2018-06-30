@@ -10,15 +10,13 @@ appPersonal.factory('AdministrativoServ', ['$http', '$q', function ($http, $q) {
 
         var self = {
 
-            //departamento, provincias, distritos
+//departamento, provincias, distritos
             'departamentos': [],
             'provincias': [],
             'distritos': [],
-
             'administrativos': [],
             'empleadoGuardado': {},
             'empleados': [],
-
             listarDepartamento: function () {
                 var d = $q.defer();
                 $http.get('/sistemaescalafonario/administrativo/listadodepartamento')
@@ -29,7 +27,6 @@ appPersonal.factory('AdministrativoServ', ['$http', '$q', function ($http, $q) {
                         });
                 return d.promise;
             },
-
             listarProvincia: function (departamento) {
                 var d = $q.defer();
                 $http.post('/sistemaescalafonario/administrativo/listadoprovincia', departamento)
@@ -40,7 +37,6 @@ appPersonal.factory('AdministrativoServ', ['$http', '$q', function ($http, $q) {
                         });
                 return d.promise;
             },
-
             listarDistrito: function (provincia) {
                 var d = $q.defer();
                 $http.post('/sistemaescalafonario/administrativo/listadodistrito', provincia)
@@ -51,7 +47,6 @@ appPersonal.factory('AdministrativoServ', ['$http', '$q', function ($http, $q) {
                         });
                 return d.promise;
             },
-
             guardarTodoAdministrativo: function (empleado, administrativo, datoslaboral, listadatosacademicos, listagradosacademicos, datosfamilia, listadatoshijos) {
                 var d = $q.defer();
                 var df = $q.defer();
@@ -67,7 +62,6 @@ appPersonal.factory('AdministrativoServ', ['$http', '$q', function ($http, $q) {
                                 listagradosacademicos[i].empleado = respuesta;
                             }
                             datosfamilia.empleado = respuesta;
-
                             d.resolve();
                             self.guardarAdministrativo(administrativo); // aqui guardardamos admnistrativo
                             self.guardarDatosLaboral(datoslaboral); // aqui guardar datos laboral
@@ -93,13 +87,9 @@ appPersonal.factory('AdministrativoServ', ['$http', '$q', function ($http, $q) {
                                             self.guardarDatosHijo(listadatoshijos[i]);
                                         }
                                     });
-
                         });
-
-
                 return d.promise;
             },
-
             guardarAdministrativo: function (administrativo) {
                 //console.log(administrativo.empleado);
                 var d = $q.defer();
@@ -110,7 +100,6 @@ appPersonal.factory('AdministrativoServ', ['$http', '$q', function ($http, $q) {
                         });
                 return d.promise;
             },
-
             guardarDatosLaboral: function (datoslaboral) {
                 var d = $q.defer();
                 $http.post('/sistemaescalafonario/administrativo/guardardatoslaboral', datoslaboral)
@@ -120,7 +109,6 @@ appPersonal.factory('AdministrativoServ', ['$http', '$q', function ($http, $q) {
                         });
                 return d.promise;
             },
-
             guardarDatosAcademicos: function (datosacademicos) {
                 var d = $q.defer();
                 $http.post('/sistemaescalafonario/administrativo/guardardatosacademicos', datosacademicos)
@@ -130,7 +118,6 @@ appPersonal.factory('AdministrativoServ', ['$http', '$q', function ($http, $q) {
                         });
                 return d.promise;
             },
-
             guardarGradosAcademicos: function (gradosacademicos) {
                 var d = $q.defer();
                 $http.post('/sistemaescalafonario/administrativo/guardargradosacademicos', gradosacademicos)
@@ -140,7 +127,6 @@ appPersonal.factory('AdministrativoServ', ['$http', '$q', function ($http, $q) {
                         });
                 return d.promise;
             },
-
             guardarDatosFamilia: function (datosfamilia) {
                 var d = $q.defer();
                 $http.post('/sistemaescalafonario/administrativo/guardardatosfamilia', datosfamilia)
@@ -150,7 +136,6 @@ appPersonal.factory('AdministrativoServ', ['$http', '$q', function ($http, $q) {
                         });
                 return d.promise;
             },
-
             guardarDatosHijo: function (datoshijo) {
                 var d = $q.defer();
                 $http.post('/sistemaescalafonario/administrativo/guardardatoshijo', datoshijo)
@@ -160,7 +145,6 @@ appPersonal.factory('AdministrativoServ', ['$http', '$q', function ($http, $q) {
                         });
                 return d.promise;
             },
-
             listarAdministrativo: function () {
                 var d = $q.defer();
                 $http.get('/sistemaescalafonario/administrativo/listadoadministrativos')
@@ -171,18 +155,16 @@ appPersonal.factory('AdministrativoServ', ['$http', '$q', function ($http, $q) {
                         });
                 return d.promise;
             },
-
             listarEmpleado: function () {
                 var d = $q.defer();
                 $http.get('/sistemaescalafonario/administrativo/listempleado')
                         .success(function (respuesta) {
                             console.log(respuesta);
-                            self.empleados = respuesta;
-                            d.resolve();
+                            // self.empleados = respuesta;
+                            d.resolve(respuesta);
                         });
                 return d.promise;
             },
-
             //OBTENER DATOS DEL ADMINSITRATIVO Y ACTUALIZAR
             obtenerDatosPersonales: function (idempleado) {
                 var d = $q.defer();
@@ -321,19 +303,17 @@ appPersonal.factory('AdministrativoServ', ['$http', '$q', function ($http, $q) {
                         });
                 return d.promise;
             },
-
             /*SERVICIO ELIMINAR ADMINISTRATIVO*/
             eliminarEmpleado: function (idempleado) {
                 var d = $q.defer();
-                $http.get('/sistemaescalafonario/administrativo/eliminarempleado?idempleado='+ idempleado)
+                $http.get('/sistemaescalafonario/administrativo/eliminarempleado?idempleado=' + idempleado)
                         .success(function (respuesta) {
-                            console.log(respuesta);                       
+                            console.log(respuesta);
                             //self.empleados = respuesta;
                             d.resolve(respuesta);
                         });
                 return d.promise;
             },
-
             eliminarAdministrativo: function (idadministrativo) {
                 var d = $q.defer();
                 $http.get('/sistemaescalafonario/administrativo/eliminaradministrativo?idadministrativo=' + idadministrativo)
@@ -387,11 +367,29 @@ appPersonal.factory('AdministrativoServ', ['$http', '$q', function ($http, $q) {
                             d.resolve(respuesta);
                         });
                 return d.promise;
+            },
+            /*Registrar Escalafon*/
+            guardarEscalafonAdm: function (escalafon) {
+                //console.log(administrativo.empleado);
+                var d = $q.defer();
+                $http.post('/sistemaescalafonario/administrativo/agregarescalafon', escalafon)
+                        .success(function (respuesta) {
+                            console.log(respuesta);
+                            d.resolve(respuesta);
+                        });
+                return d.promise;
+            },
+            /*Listar escalafon por idempleado*/
+            listarEscalafonAdm: function (idempleado) {
+                //console.log(administrativo.empleado);
+                var d = $q.defer();
+                $http.get('/sistemaescalafonario/administrativo/listarescalafonadm?idempleado=' + idempleado)
+                        .success(function (respuesta) {
+                            console.log(respuesta);
+                            d.resolve(respuesta);
+                        });
+                return d.promise;
             }
-
-
-
-
 
 
 

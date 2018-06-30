@@ -5,6 +5,7 @@
  */
 package pe.unsch.sistemaescalafonario.service;
 
+import java.util.List;
 import pe.unsch.sistemaescalafonario.entity.Escalafon;
 
 /**
@@ -12,5 +13,5 @@ import pe.unsch.sistemaescalafonario.entity.Escalafon;
  * @author José
  */
 public interface EscalafonService extends GenericService<Escalafon> {
-    
+    List<Escalafon> listarEscalafonPorEmpleado (int idempleado);
 }

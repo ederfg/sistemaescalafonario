@@ -121,14 +121,18 @@
                         templateUrl: '/sistemaescalafonario/administrativo/escalafonadministrativo',
                         controller: 'administrativoescalafonCtrl'
                     })
+                    .when('/administrativo/mantenimientoescalafon/verescalafonadministrativo/:idempleado', {
+                        templateUrl: '/sistemaescalafonario/administrativo/mantenimientoescalafon/ver',
+                        controller: 'administrativoescalafonverCtrl'
+                    })
+                    
+                    
+                    
                     .when('/administrativo/mantenimientoescalafon/agregarescalafonadministrativo', {
                         templateUrl: '/sistemaescalafonario/administrativo/mantenimientoescalafon/agregar',
                         controller: 'administrativoescalafonagregarCtrl'
                     })
-                     .when('/administrativo/mantenimientoescalafon/verescalafonadministrativo', {
-                        templateUrl: '/sistemaescalafonario/administrativo/mantenimientoescalafon/ver',
-                        controller: 'administrativoescalafonverCtrl'
-                    })
+                     
                     
                     
                     
