@@ -317,8 +317,97 @@ appPersonal.factory('DocenteServ', ['$http', '$q', function ($http, $q) {
                             d.resolve(respuesta);
                         });
                 return d.promise;    
-            }
+            },
             
+            
+            /*SERVICIO ELIMINAR DOCENTE*/
+            eliminarEmpleado: function (idempleado) {
+                var d = $q.defer();
+                $http.get('/sistemaescalafonario/docente/eliminarempleado?idempleado='+ idempleado)
+                        .success(function (respuesta) {
+                            console.log(respuesta);                       
+                            //self.empleados = respuesta;
+                            d.resolve(respuesta);
+                        });
+                return d.promise;
+            },
+
+            eliminarDocente: function (iddocente) {
+                var d = $q.defer();
+                $http.get('/sistemaescalafonario/docente/eliminardocente?iddocente=' + iddocente)
+                        .success(function (respuesta) {
+                            console.log(respuesta);
+                            d.resolve(respuesta);
+                        });
+                return d.promise;
+            },
+            eliminarDatosLaboral: function (iddatolaboral) {
+                var d = $q.defer();
+                $http.get('/sistemaescalafonario/docente/eliminardatoslaboral?iddatolaboral=' + iddatolaboral)
+                        .success(function (respuesta) {
+                            console.log(respuesta);
+                            d.resolve(respuesta);
+                        });
+                return d.promise;
+            },
+            eliminarDatoAcademico: function (iddatoacademico) {
+                var d = $q.defer();
+                $http.get('/sistemaescalafonario/docente/eliminardatoacademico?iddatoacademico=' + iddatoacademico)
+                        .success(function (respuesta) {
+                            console.log(respuesta);
+                            d.resolve(respuesta);
+                        });
+                return d.promise;
+            },
+            eliminarGradoAcademico: function (idgradoacademico) {
+                var d = $q.defer();
+                $http.get('/sistemaescalafonario/docente/eliminargradoacademico?idgradoacademico=' + idgradoacademico)
+                        .success(function (respuesta) {
+                            console.log(respuesta);
+                            d.resolve(respuesta);
+                        });
+                return d.promise;
+            },
+            eliminarDatoHijo: function (idhijo) {
+                var d = $q.defer();
+                $http.get('/sistemaescalafonario/docente/eliminarhijo?idhijo=' + idhijo)
+                        .success(function (respuesta) {
+                            console.log(respuesta);
+                            d.resolve(respuesta);
+                        });
+                return d.promise;
+            },
+            eliminarFamilia: function (idfamilia) {
+                var d = $q.defer();
+                $http.get('/sistemaescalafonario/docente/eliminarfamilia?idfamilia=' + idfamilia)
+                        .success(function (respuesta) {
+                            console.log(respuesta);
+                            d.resolve(respuesta);
+                        });
+                return d.promise;
+            },
+            /*Registrar Escalafon*/
+            guardarEscalafonDoc: function (escalafon) {
+                //console.log(administrativo.empleado);
+                var d = $q.defer();
+                $http.post('/sistemaescalafonario/docente/agregarescalafon', escalafon)
+                        .success(function (respuesta) {
+                            console.log(respuesta);
+                            d.resolve(respuesta);
+                        });
+                return d.promise;
+            },
+            /*Listar escalafon por idempleado*/
+            listarEscalafonDoc: function (idempleado) {
+                //console.log(administrativo.empleado);
+                var d = $q.defer();
+                $http.get('/sistemaescalafonario/docente/listarescalafondoc?idempleado=' + idempleado)
+                        .success(function (respuesta) {
+                            console.log(respuesta);
+                            d.resolve(respuesta);
+                        });
+                return d.promise;
+            }
             
 
         };

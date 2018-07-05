@@ -241,7 +241,7 @@
 
             <p>{{empleado| json}}</p>
 
-            <hr class="mb-4">
+            <hr class="mb-4" color="blue" size=3>
 
             <div class="row">
                 <div class="col-md-4 mb-3">

@@ -67,12 +67,12 @@
                     <td><a href="#/docente/mantenimiento/modificardocente/{{docente.empleado.id}}" class="btn btn-success">Modificar</a></td>
                     <td>
                         <!-- Button trigger modal -->
-                        <button id="agregar" type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModal">
+                        <button id="agregar" type="button" class="btn btn-info" ng-click="verDetalleDocente(docente.empleado.id)" data-toggle="modal" data-target="#modalDetalleDocente">
                             Ver
-                        </button>                    
+                        </button>                  
                     </td>
                     <!-- <td><a href="#/administrativo/mantenimiento/veradministrativo" class="btn btn-info">Ver</a></td> -->
-                    <td><a href="" class="btn btn-danger">Eliminar</a></td>
+                    <td><button ng-click="eliminarDocente(docente.empleado.id)"  class="btn btn-danger">Eliminar</button></td>
 
                 </tr>
                
@@ -83,556 +83,293 @@
     </div>
 </main>
 
-
 <!-- Modal ver docente-->
-
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="modalDetalleDocente" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class=" modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                
+
                 <h3 class="modal-title" id="exampleModalLabel">DATOS DEL DOCENTE</h3>
-                
+
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <br>
             <div class="container">
-                
+
                 <div class="col-md-12 order-md-1">
                     <h4 class="mb-3">DATOS PERSONALES</h4>
-                    <form class="needs-validation" novalidate>
-                        <div class="row">
-                            <div class="col-md-4 mb-3">
-                                <label for="apPaterno">Apellido Paterno</label>
-                                <input type="text" class="form-control" id="apPaterno" placeholder="" value="" required>
-                                <div class="invalid-feedback">
-                                    Es obligatorio ingresar el apellido paterno.
-                                </div>
-                            </div>
-                            <div class="col-md-4 mb-3">
-                                <label for="apMaterno">Apellido Materno</label>
-                                <input type="text" class="form-control" id="apMaterno" placeholder="" value="" required>
-                                <div class="invalid-feedback">
-                                    Es obligatorio ingresar el apellido materno.
-                                </div>
-                            </div>
-                            <div class="col-md-4 mb-3">
-                                <label for="nombres">Nombres</label>
-                                <input type="text" class="form-control" id="nombres" placeholder="" value="" required>
-                                <div class="invalid-feedback">
-                                    Es obligatorio ingresar los nombres.
-                                </div>
-                            </div>  
-                        </div>
+                    <table class="table table-sm table-bordered table-striped" border="1">
+                        <thead>
+                            <tr>
+                                <th>APELLIDO PATERNO</th>
+                                <th>APELLIDO MATERNO</th>
+                                <th>NOMBRES</th>
+                                <th>DNI</th>
+                                <th>SEXO</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>{{empleado.apellidopaterno}}</td>
+                                <td>{{empleado.apellidomaterno}}</td>
+                                <td>{{empleado.nombres}}</td>
+                                <td>{{empleado.dni}}</td>
+                                <td>{{empleado.sexo}}</td>
+                            </tr>
+                        </tbody>
 
-                        <div class="row">
-                            <div class="col-md-3 mb-3">
-                                <label for="dni">DNI N°</label>
-                                <input type="text" class="form-control" id="dni" placeholder="" value="" required>
-                                <div class="invalid-feedback">
-                                    Es obligatorio ingresar el DNI. 
-                                </div>
-                            </div>
-                            <div class="col-md-4 mb-3">
-                                <label for="fechaNac">Fecha de Nacimiento<span class="text-muted">(14/07/18)</span></label>
-                                <input type="date" class="form-control" id="fechaNac" placeholder="" value="" required>
-                                <div class="invalid-feedback">
-                                    Es obligatorio ingresar la fecha de nacimiento.
-                                </div>
-                            </div>
-                            <div class="col-md-2 mb-3">
-                                <label for="sexo">Sexo</label>
-                                <select class="custom-select d-block w-100" id="sexo" required>
-                                    <option value="">Escoger...</option>
-                                    <option>M</option>
-                                    <option>F</option>
-                                </select>
-                                <div class="invalid-feedback">
-                                    Por favor selecciona un tipo de sexo.
-                                </div>
-                            </div>
-                            <div class="col-md-3 mb-3">
-                                <label for="estadoCivil">Estado Civil</label>
-                                <select class="custom-select d-block w-100" id="estadoCivil" required>
-                                    <option value="">Escoger...</option>
-                                    <option>Solter@</option>
-                                    <option>Casad@</option>
-                                    <option>Viud@</option>
-                                    <option>divorciad@</option>
-                                    <option>concubin@</option>
-                                </select>
-                                <div class="invalid-feedback">
-                                    Por favor selecciona un estado civil.
-                                </div>
-                            </div>  
+                        <thead>
+                            <tr>
+                                <th>FECHA NACIMIENTO</th>
+                                <th>CORREO</th>
+                                <th>ESTADO CIVIL</th>
+                                <th>RUC</th>
+                                <th>CELULAR</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>{{empleado.fechanacimiento}}</td>
+                                <td>{{empleado.correoelectronico}}</td>
+                                <td>{{empleado.estadocivil}}</td>
+                                <td>{{empleado.ruc}}</td>
+                                <td>{{empleado.celular}}</td>
+                            </tr>
+                        </tbody>
 
-                        </div>  
+                        <thead>
+                            <tr>
+                                <th>DEPARTAMENTO</th>
+                                <th>PROVINCIA</th>
+                                <th>DISTRITO</th>
+                                <th colspan="2">DIRECCIÓN</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>{{empleado.distrito.provincia.departamento.nombredepartamento}}</td>
+                                <td>{{empleado.distrito.provincia.nombreprovincia}}</td>
+                                <td>{{empleado.distrito.nombredistrito}}</td>
+                                <td colspan="2">{{empleado.direccion}}</td>
+                            </tr>
+                        </tbody>
 
-                        <div class="mb-3">
-                            <label for="direccion">Dirección</label>
-                            <div class="input-group">
-                                <input type="text" class="form-control" id="direccion" placeholder="" required>
-                                <div class="invalid-feedback" style="width: 100%;">
-                                    Por favor ingrese su direccion correcta
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <div class="row">
-                            <div class="col-md-4 mb-3">
-                                <label for="depa">Departamento</label>
-                                <select class="custom-select d-block w-100" id="depa" required>
-                                    <option value="">Escoger...</option>
-                                    <option></option>
-                                    <option></option>
-                                    <option></option>
-                                    <option></option>
-                                    <option></option>
-                                    <option></option>
-                                    <option></option>
-                                    <option></option>
-                                    <option></option>
-
-                                </select>
-                                <div class="invalid-feedback">
-                                    Por favor selecciona un departamento
-                                </div>
-                            </div>
-                            <div class="col-md-4 mb-3">
-                                <label for="prov">Provincia</label>
-                                <select class="custom-select d-block w-100" id="prov" required>
-                                    <option value="">Escoger...</option>
-                                    <option></option>
-                                    <option></option>
-                                    <option></option>
-                                    <option></option>
-                                    <option></option>
-                                    <option></option>
-                                    <option></option>
-
-                                </select>
-                                <div class="invalid-feedback">
-                                    Por favor selecciona una provincia
-                                </div>
-                            </div>
-                            <div class="col-md-4 mb-3">
-                                <label for="dist">Distrito</label>
-                                <select class="custom-select d-block w-100" id="dist" required>
-                                    <option value="">Escoger...</option>
-                                    <option></option>
-                                    <option></option>
-                                    <option></option>
-                                    <option></option>
-                                    <option></option>
-
-                                </select>
-                                <div class="invalid-feedback">
-                                    Por favor selecciona un distrito
-                                </div>
-                            </div>  
-
-                        </div>   
-
-                        <div class="row">
-                            <div class="col-md-4 mb-3">
-                                <label for="cel">Celular</label>
-                                <input type="text" class="form-control" id="cel" placeholder="" value="" required>
-                                <div class="invalid-feedback">
-                                    Por favor ingrese un celular.
-                                </div>
-                            </div>
-                            <div class="col-md-4 mb-3">
-                                <label for="correo">Correo<span class="text-muted">(Ejm: yelina24@gmail.com)</span></label>
-                                <input type="text" class="form-control" id="correo" placeholder="" value="" required>
-                                <div class="invalid-feedback">
-                                    Por favor ingrese un correo.
-                                </div>
-                            </div>
-                            <div class="col-md-4 mb-3">
-                                <label for="grupoSang">Grupo Sanguineo</label>
-                                <select class="custom-select d-block w-100" id="grupoSang" required>
-                                    <option value="">Escoger...</option>
-                                    <option>A+</option>
-                                    <option>A-</option>
-                                    <option>B+</option>
-                                    <option>B-</option>
-                                    <option>AB+</option>
-                                    <option>AB-</option>
-                                    <option>O+</option>
-                                    <option>O-</option>
-                                </select>
-                                <div class="invalid-feedback">
-                                    Por favor selecciona el tipo de sangue.
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label for="ruc">N° de RUC</label>
-                                <input type="text" class="form-control" id="ruc" placeholder="" value="" required>
-                                <div class="invalid-feedback">
-                                    Por favor ingrese su numero de RUC.
-                                </div>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="sistPens">Sistema Pensionario</label>
-                                <select class="custom-select d-block w-100" id="sistPens" required>
-                                    <option value="">Escoger...</option>
-                                    <option>Sistema Nacional de Pensiones</option>
-                                    <option>Sistema Privado de Pensiones</option>
-                                </select>
-                                <div class="invalid-feedback">
-                                    Por favor selecciona el sistema pensionario
-                                </div>
-                            </div>
-
-
-                            <div class="col-md-6 d-inline my-3">
-                                <label for="sistPens">¿Perceptor de mayor ingreso en el hogar?</label>     
-                                <div class="custom-control custom-radio">
-                                    <input id="credit" name="1" type="radio" class="custom-control-input" checked required>
-                                    <label class="custom-control-label" for="credit">Si</label>
-                                </div>
-                                <div class="custom-control custom-radio">
-                                    <input id="debit" name="1" type="radio" class="custom-control-input" required>
-                                    <label class="custom-control-label" for="debit">No</label>
-                                </div>
-                            </div>
-
-                            <div class="col-md-6 d-inline my-3">
-                                <label for="sistPens">¿Afiliado a algún sindicato?</label>     
-                                <div class="custom-control custom-radio">
-                                    <input id="2" name="2" type="radio" class="custom-control-input" checked required>
-                                    <label class="custom-control-label" for="2">Si</label>
-                                </div>
-                                <div class="custom-control custom-radio">
-                                    <input id="3" name="2" type="radio" class="custom-control-input" required>
-                                    <label class="custom-control-label" for="3">No</label>
-                                </div>
-                            </div>    
-
-                        </div> 
-                                      
-                    </form>
+                        <thead>
+                            <tr>
+                                <th>GRUPO SANGUINEO</th>
+                                <th>PERCEPTOR MAYOR INGRESO?</th>
+                                <th>AFILIDADO ALGUN SINDICATO?</th>
+                                <th colspan="2">SISTEMA PENSIONARIO</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>{{empleado.gruposanguineo}}</td>
+                                <td>{{empleado.mayoringreso}}</td>
+                                <td>{{empleado.afiliacionsindicato}}</td>
+                                <td colspan="2">{{empleado.sistemapensionario}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
 
-                <div>
-                    <br>
-                    <hr class="mb-4">
-                    <h4 class="mb-3">DATOS FAMILIARES</h4>
-                    <form class="needs-validation" novalidate>
-                        <div class="row">
-                            <div class="col-md-4 mb-3">
-                                <label for="apPatCony">Ap. Paterno Conyugue</label>
-                                <input type="text" class="form-control" id="apPatCony" placeholder="" value="" required>
-                                <div class="invalid-feedback">
-                                    Es necesario ingresar el apellido paterno del conyugue.
-                                </div>
-                            </div>
-                            <div class="col-md-4 mb-3">
-                                <label for="apMatCony">Ap. Materno Conyugue</label>
-                                <input type="text" class="form-control" id="apMatCony" placeholder="" value="" required>
-                                <div class="invalid-feedback">
-                                    Es necesario ingresar el apellido materno del conyugue.
-                                </div>
-                            </div>
-                            <div class="col-md-4 mb-3">
-                                <label for="nombCony">Nombres Conyugue</label>
-                                <input type="text" class="form-control" id="nombCony" placeholder="" value="" required>
-                                <div class="invalid-feedback">
-                                    Es necesario ingresar el nombre del conyugue.
-                                </div>
-                            </div>  
-                        </div>
 
-                        <div class="row">
-                            <div class="col-md-3 mb-3">
-                                <label for="dnicony">DNI Conyugue N°</label>
-                                <input type="text" class="form-control" id="dnicony" placeholder="" value="" required>
-                                <div class="invalid-feedback">
-                                    Ingrese el DNI del conyugue.
-                                </div>
-                            </div>
-                            <div class="col-md-4 mb-3">
-                                <label for="fechaNacCony">Fecha de Nac. Conyugue</label>
-                                <input type="date" class="form-control" id="fechaNacCony" placeholder="" value="" required>
-                                <div class="invalid-feedback">
-                                    Ingrese la fecha de nacimineto del conyugue.
-                                </div>
-                            </div>
-                            <div class="col-md-2 mb-3">
-                                <label for="vive">¿Vive?</label>
-                                <select class="custom-select d-block w-100" id="vive" required>
-                                    <option value="">Escoger...</option>
-                                    <option>Si</option>
-                                    <option>No</option>
-                                </select>
-                                <div class="invalid-feedback">
-                                    Por favor seleccione si vive o no.
-                                </div>
-                            </div>
-                            <div class="col-md-3 mb-3">
-                                <label for="CelularCony">Celular</label>
-                                <input type="text" class="form-control" id="CelularCony" placeholder="" value="" required>
-                                <div class="invalid-feedback">
-                                    Ingrese el numero de celular.
-                                </div>
-                            </div> 
-
-                        </div>  
-                        <label><B>Hijos (solo menores de edad)</B></label>
-                       
-                        <table class="table table-bordered btn-success">
-                            <thead>
-                                <tr>
-                                    <th scope="col">N°</th>
-                                    <th scope="col">Ap. Paterno</th>
-                                    <th scope="col">Ap. Materno</th>
-                                    <th scope="col">Nombres</th>
-                                    <th scope="col">Sexo</th>
-                                    <th scope="col">Fecha Nacimiento</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td><input type="text" class=" form-control" id="CelularCony" placeholder="" value="" required></td>
-                                    <td><input type="text" class=" form-control" id="CelularCony" placeholder="" value="" required></td>
-                                    <td><input type="text" class="form-control" id="CelularCony" placeholder="" value="" required></td>
-                                    <td><input type="text" class="form-control" id="CelularCony" placeholder="" value="" required></td>
-
-                                    <td><input type="text" class="form-control" id="CelularCony" placeholder="" value="" required></td>
-                                </tr>
-
-                            </tbody>
-                        </table>                                          
-                        <label><B>En caso de emergencia llamar a:</B></label>         
-                        <div class="row">
-
-                            <div class="col-md-6 mb-3">
-
-                                <label for="ruc">Nombre de emergencia</label>
-                                <input type="text" class="form-control" id="ruc" placeholder="" value="" required>
-                                <div class="invalid-feedback">
-                                    Por favor ingrese el nombre de emergencia
-                                </div>
-                            </div>
-
-                            <div class="col-md-6 mb-3">
-                                <label for="ruc">Celular de emergencia</label>
-                                <input type="text" class="form-control" id="ruc" placeholder="" value="" required>
-                                <div class="invalid-feedback">
-                                    Por favor ingrese el celular de emergencia
-                                </div>
-                            </div>
+                <div class="col-md-12 order-md-1">
+                    <h4 class="mb-3">DATOS DOCENTE</h4>
+                    <table class="table table-sm table-bordered table-striped" border="1">
+                        <thead>
+                            <tr>
+                                <th>CÓDIGO</th>
+                                <th>CATEGORIA</th>
+                                <th>REGIMEN DEDICACION</th>
+                                <th>NIVEL REMUNERATIVO</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>{{docente.codigodocente}}</td>
+                                <td>{{docente.categoriadocente}}</td>
+                                <td>{{docente.regimendedicacion}}</td>
+                                <td>{{docente.nivelremunerativodoc}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
 
 
-                        </div>
-                    </form>
+                <div class="col-md-12 order-md-1">
+                    <h4 class="mb-3">DATOS LABORAL</h4>
+                    <table class="table table-sm table-bordered table-striped" border="1">
+                        <thead>
+                            <tr>
+                                <th>FECHA INGRESO</th>
+                                <th>TIPO CONTRATO</th>
+                                <th>PUESTO</th>
+                                <th>FACULTAD</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>{{datoslaboral.fechaingresoinst}}</td>
+                                <td>{{datoslaboral.tipocontrato}}</td>
+                                <td>{{datoslaboral.puesto}}</td>
+                                <td>{{datoslaboral.facultad}}</td>
+                            </tr>
+                        </tbody>
 
-                    <br>
-                    <hr class="mb-4">
+                        <thead>
+                            <tr>
+                                <th>TIPO CESE</th>
+                                <th>INGRESO MENSUAL</th>
+                                <th>CONDICION LABORAL</th>
+                                <th>FECHA CESE</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>{{datoslaboral.cese}}</td>
+                                <td>{{datoslaboral.ingmensualbruto}}</td>
+                                <td>{{datoslaboral.condicionlaboral}}</td>
+                                <td>{{datoslaboral.fechacese}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="col-md-12 order-md-1">
                     <h4 class="mb-3">DATOS ACADEMICOS</h4>
-                    <form class="needs-validation" novalidate>                                          
+                    <table class="table table-sm table-bordered table-striped" border="1">
+                        <thead>
+                            <tr>
+                                <th>Grado instruccion</th>
+                                <th>Condicion</th>
+                                <th>Nombre institucion</th>
+                                <th>Año egreso</th>
+                                <th>Especialidad</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="datoacademico in listadoDatosAcademicos">
+                                <td>{{datoacademico.gradoinstruccion}}</td>
+                                <td>{{datoacademico.condicion}}</td>
+                                <td>{{datoacademico.nombreinstitucion}}</td>
+                                <td>{{datoacademico.anioegreso}}</td>
+                                <td>{{datoacademico.especialidad}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
 
-                        
-                        <table class="table table-bordered btn-success">
-                            <thead>
-                                <tr>
-                                    <th scope="col">Nivel Educativo</th>
-                                    <th scope="col">Condición</th>
-                                    <th scope="col">Centro Educativo o Institucion</th>
-                                    <th scope="col">Año concluido</th>
-                                    <th scope="col">Especialidad</th>
-
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><input type="text" class=" form-control" id="CelularCony" placeholder="" value="" required></td>
-                                    <td><input type="text" class=" form-control" id="CelularCony" placeholder="" value="" required></td>
-                                    <td><input type="text" class=" form-control" id="CelularCony" placeholder="" value="" required></td>
-                                    <td><input type="text" class="form-control" id="CelularCony" placeholder="" value="" required></td>
-                                    <td><input type="text" class="form-control" id="CelularCony" placeholder="" value="" required></td>
-
-                                </tr>
-
-                            </tbody>
-                        </table>
-
-                        
-                        <table class="table table-bordered btn-success">
-                            <thead>
-                                <tr>
-                                    <th scope="col">Grado</th>
-                                    <th scope="col">Condición</th>
-                                    <th scope="col">Centro Educativo o Institución</th>
-                                    <th scope="col">Año concluido</th>
-                                    <th scope="col">Especialidad</th>
-
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><input type="text" class=" form-control" id="CelularCony" placeholder="" value="" required></td>
-                                    <td><input type="text" class=" form-control" id="CelularCony" placeholder="" value="" required></td>
-                                    <td><input type="text" class=" form-control" id="CelularCony" placeholder="" value="" required></td>
-                                    <td><input type="text" class="form-control" id="CelularCony" placeholder="" value="" required></td>
-                                    <td><input type="text" class="form-control" id="CelularCony" placeholder="" value="" required></td>
-
-                                </tr>
-
-                            </tbody>
-                        </table>
-
-                    </form>    
-
-                    <br>
-                    <hr class="mb-4">
-                    <h4 class="mb-3">DATOS DE VINCULO LABORAL</h4>
-                    <form class="needs-validation" novalidate>
-                        <div class="row">
-                            <div class="col-md-4 mb-3">
-                                <label for="codigo">Código</label>
-                                <input type="text" class="form-control" id="codigo" placeholder="" value="" required>
-                                <div class="invalid-feedback">
-                                    Es obligatorio ingresar el codigo
-                                </div>
-                            </div>
-                            <div class="col-md-4 mb-3">
-                                <label for="fechaIngreso">Fecha Ingreso a la Institución</label>
-                                <input type="date" class="form-control" id="fechaIngreso" placeholder="" value="" required>
-                                <div class="invalid-feedback">
-                                    Por favor ingrese la fecha de ingreso a la institucion.
-                                </div>
-                            </div>
-                            <div class="col-md-4 mb-3">
-                                <label for="condicionLab">Condición Laboral</label>
-                                <select class="custom-select d-block w-100" id="condicionLab" required>
-                                    <option value="">Escoger...</option>
-                                    <option>Nombrado</option>
-                                    <option>Contratado</option>
-                                    <option>CAS</option>
-                                    <option>Otros</option>
-                                </select>
-                                <div class="invalid-feedback">
-                                    Por favor selecciona una condicion. 
-                                </div>
-                            </div>   
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-4 mb-3">
-                                <label for="categoria">Categoría Docente</label>
-                                <select class="custom-select d-block w-100" id="categoria" required>
-                                    <option value="">Escoger...</option>
-                                    <option>Principal</option>
-                                    <option>Asociado</option>
-                                    <option>Auxiliar</option>
-                                    <option>Jefe Practicas</option>
-                                </select>
-                                <div class="invalid-feedback">
-                                    Por favor selecciona una categoria. 
-                                </div>
-                            </div> 
-                            <div class="col-md-4 mb-3">
-                                <label for="regimenDed">Régimen Dedicación</label>
-                                <select class="custom-select d-block w-100" id="regimenDed" required>
-                                    <option value="">Escoger...</option>
-                                    <option>Exclusivo</option>
-                                    <option>Completo</option>
-                                    <option>Parcial</option>
-
-                                </select>
-                                <div class="invalid-feedback">
-                                    Por favor selecciona un regimen de dedicacion. 
-                                </div>
-                            </div> 
-                            <div class="col-md-4 mb-3">
-                                <label for="tipoContrato">Tipo de Contrato</label>
-                                <input type="text" class="form-control" id="tipoContrato" placeholder="" value="" required>
-                                <div class="invalid-feedback">
-                                    Por favor ingrese el tipo de contrato.
-                                </div>
-                            </div> 
-
-                        </div>  
-
-                        <div class="row">
-                            <div class="col-md-3 mb-3">
-                                <label for="puesto">Puesto Ocupado</label>
-                                <input type="text" class="form-control" id="puesto" placeholder="" value="" required>
-                                <div class="invalid-feedback">
-                                    Por favor ingrese el puesto.
-                                </div>
-                            </div>
-
-                            <div class="col-md-3 mb-3">
-                                <label for="facultad">Facultad</label>
-                                <select class="custom-select d-block w-100" id="facultad" required>
-                                    <option value="">Escoger...</option>
-                                    <option>FACULTAD DE CIENCIAS AGRARIAS</option>
-                                    <option>FACULTAD DE CIENCIAS BIOLOGICAS</option>
-                                    <option>FACULTAD DE CIENCIAS DE LA EDUCACION</option>
-                                    <option>FACULTAD DE CIENCIAS ECONOMICAS , ADMINISTRATIVAS Y CONTABLES</option>
-                                    <option>FACULTAD DE CIENCIAS SOCIALES</option>
-                                    <option>FACULTAD DE DERECHO Y CIENCIAS POLITICAS</option>
-                                    <option>FACULTAD DE ENFERMERIA</option>
-                                    <option>FACULTAD DE INGENIERIA DE MINAS, GEOLOGIA Y CIVIL</option>
-                                    <option>FACULTAD DE INGENIERIA QUIMICA Y METALURGIA</option>
-                                    <option>FACULTAD DE OBSTETRICIA</option>
-
-                                </select>
-                                <div class="invalid-feedback">
-                                    Por favor selecciona una Facultad
-                                </div>
-                            </div>
-                            <div class="col-md-3 mb-3">
-                                <label for="cese">Tipo de Cese</label>
-                                <select class="custom-select d-block w-100" id="cese" required>
-                                    <option value="">Escoger...</option>
-                                    <option>Definitivo</option>
-                                    <option>Parcial</option>
-
-                                </select>
-                                <div class="invalid-feedback">
-                                    Por favor selecciona el tipo de cese.
-                                </div>
-                            </div>
-                            <div class="col-md-3 mb-3">
-                                <label for="fechaCese">Fecha de Cese</label>
-                                <input type="date" class="form-control" id="fechaCese" placeholder="" value="" required>
-                                <div class="invalid-feedback">
-                                    Por favor ingrese la fecha de cese.
-                                </div>
-                            </div> 
-
-                        </div>   
-
-                        <div class="row">
-                            <div class="col-md-4 mb-3">
-                                <label for="ingresoMensual">Ingreso Mensual Bruto</label>
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text">S/</span>
-                                    </div>
-                                    <input type="text" class="form-control" id="ingresoMensual" placeholder="" required>
-                                    <div class="invalid-feedback" style="width: 100%;">
-                                        Por favor ingrese el ingreso mensual.
-                                    </div>
-                                </div>
-                            </div>  
+                <div class="col-md-12 order-md-1">
+                    <h4 class="mb-3">GRADOS ACADEMICOS</h4>
+                    <table class="table table-sm table-bordered table-striped" border="1">
+                        <thead>
+                            <tr>
+                                <th>Grado</th>
+                                <th>Condición</th>
+                                <th>Nombre institucion</th>
+                                <th>Fecha conclusion</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="gradocademico in listadoGradosAcademicos">
+                                <td>{{gradocademico.grado}}</td>
+                                <td>{{gradocademico.condicion}}</td>
+                                <td>{{gradocademico.nombreinstitucion}}</td>
+                                <td>{{gradocademico.fechaconclusion}}</td>
+                            </tr>
+                        </tbody>
 
 
-                        </div>                       
+                    </table>
+                </div>
 
-                    </form>
+                <div class="col-md-12 order-md-1">
+                    <h4 class="mb-3">GRADOS ACADEMICOS</h4>
+                    <table class="table table-sm table-bordered table-striped" border="1">
+                        <thead>
+                            <tr>
+                                <th>Grado</th>
+                                <th>Condición</th>
+                                <th>Nombre institucion</th>
+                                <th>Fecha conclusion</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="gradocademico in listadoGradosAcademicos">
+                                <td>{{gradocademico.grado}}</td>
+                                <td>{{gradocademico.condicion}}</td>
+                                <td>{{gradocademico.nombreinstitucion}}</td>
+                                <td>{{gradocademico.fechaconclusion}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
 
+
+                <div class="col-md-12 order-md-1">
+                    <h4 class="mb-3">DATOS FAMILIA</h4>
+                    <table class="table table-sm table-bordered table-striped" border="1">
+                        <thead>
+                            <tr>
+                                <th>AP PATERNO CONYUGUE</th>
+                                <th>AP MATERNO CONYUGUE</th>
+                                <th>NOMBRES</th>
+                                <th>DNI</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>{{datosfamilia.appatconyugue}}</td>
+                                <td>{{datosfamilia.apmatconyugue}}</td>
+                                <td>{{datosfamilia.nombresconyugue}}</td>
+                                <td>{{datosfamilia.dniconyugue}}</td>
+                            </tr>
+                        </tbody>
+
+                        <thead>
+                            <tr>
+                                <th>FECHA NAC. CONYUGUE</th>
+                                <th>CELULAR CONYUGE </th>
+                                <th>NOMBRE EMERGENCIA</th>
+                                <th>CEL EMERGENCIA</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>{{datosfamilia.fechanacimiconyugue}}</td>
+                                <td>{{datosfamilia.celularconyugue}}</td>
+                                <td>{{datosfamilia.nombreemergencia}}</td>
+                                <td>{{datosfamilia.celularemergencia}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <!--DATOS HIJOS-->
+                    <p>DATOS HIJOS</p>
+                    <table class="table table-sm table-bordered table-striped" border="1">
+                        <thead>
+                            <tr>
+                                <th>DNI</th>
+                                <th>AP. PATERNO</th>
+                                <th>AP. MATERNO</th>
+                                <th>NOMBRES</th>
+                                <th>FECHA NACIMIENTO</th>
+                                <th>SEXO</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="datohijo in listadodatoshijos| orderBy: 'id'">
+                                <td>{{datohijo.dnihijo}}</td>
+                                <td>{{datohijo.appathijo}}</td>
+                                <td>{{datohijo.apmathijo}}</td>
+                                <td>{{datohijo.nombreshijo}}</td>
+                                <td>{{datohijo.fechanachijo}}</td>
+                                <td>{{datohijo.sexo}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
 
 
