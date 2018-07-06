@@ -72,14 +72,18 @@
                         templateUrl: '/sistemaescalafonario/docente/escalafondocente',
                         controller: 'docenteescalafonCtrl'
                     })
+                        
+                    .when('/docente/mantenimientoescalafon/verescalafondocente/:idempleado', {
+                        templateUrl: '/sistemaescalafonario/docente/mantenimientoescalafon/ver',
+                        controller: 'docenteescalafonverCtrl'
+                    })
+                                
+                    
                     .when('/docente/mantenimientoescalafon/agregarescalafondocente', {
                         templateUrl: '/sistemaescalafonario/docente/mantenimientoescalafon/agregar',
                         controller: 'docenteescalafonagregarCtrl'
                     })
-                     .when('/docente/mantenimientoescalafon/verescalafondocente', {
-                        templateUrl: '/sistemaescalafonario/docente/mantenimientoescalafon/ver',
-                        controller: 'docenteescalafonverCtrl'
-                    })
+                    
                     
                     
                     

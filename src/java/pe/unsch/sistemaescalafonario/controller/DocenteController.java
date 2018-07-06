@@ -24,6 +24,7 @@ import pe.unsch.sistemaescalafonario.entity.Departamento;
 import pe.unsch.sistemaescalafonario.entity.Distrito;
 import pe.unsch.sistemaescalafonario.entity.Docente;
 import pe.unsch.sistemaescalafonario.entity.Empleado;
+import pe.unsch.sistemaescalafonario.entity.Escalafon;
 import pe.unsch.sistemaescalafonario.entity.Gradoacademico;
 import pe.unsch.sistemaescalafonario.entity.Provincia;
 import pe.unsch.sistemaescalafonario.service.DatosacademicosService;
@@ -34,6 +35,7 @@ import pe.unsch.sistemaescalafonario.service.DepartamentoService;
 import pe.unsch.sistemaescalafonario.service.DistritoService;
 import pe.unsch.sistemaescalafonario.service.DocenteService;
 import pe.unsch.sistemaescalafonario.service.EmpleadoService;
+import pe.unsch.sistemaescalafonario.service.EscalafonService;
 import pe.unsch.sistemaescalafonario.service.GradoacademicoService;
 import pe.unsch.sistemaescalafonario.service.ProvinciaService;
 
@@ -118,6 +120,9 @@ public class DocenteController {
     DatosfamiliaService datosfamiliaService;
     @Autowired
     DatoshijosService datoshijosService;
+    
+    @Autowired
+    EscalafonService escalafonService;
     
      
     @RequestMapping(value = "listadodocentes",method = RequestMethod.GET)
@@ -305,6 +310,64 @@ public class DocenteController {
     }
         
     
+    /*-------------------------------ELIMINAR--------------------------*/
+    @RequestMapping(value = "eliminardocente", method = RequestMethod.GET)
+    @ResponseBody
+    public int eliminarDocente(@RequestParam int iddocente) {
+        return docenteService.drop(iddocente);
+    }
+
+    @RequestMapping(value = "eliminardatoslaboral", method = RequestMethod.GET)
+    @ResponseBody
+    public int eliminarDatosLaboral(@RequestParam int iddatolaboral) {
+        return datoslaboralService.drop(iddatolaboral);
+    }
+
+    @RequestMapping(value = "eliminardatoacademico", method = RequestMethod.GET)
+    @ResponseBody
+    public int eliminarDatoAcademico(@RequestParam int iddatoacademico) {
+        return datosacademicosService.drop(iddatoacademico);
+    }
+
+    @RequestMapping(value = "eliminargradoacademico", method = RequestMethod.GET)
+    @ResponseBody
+    public int eliminarGradosAcademicos(@RequestParam int idgradoacademico) {
+        return gradoacademicoService.drop(idgradoacademico);
+    }
+
+    @RequestMapping(value = "eliminarhijo", method = RequestMethod.GET)
+    @ResponseBody
+    public int eliminarHijos(@RequestParam int idhijo) {
+        return datoshijosService.drop(idhijo);
+    }
+
+    @RequestMapping(value = "eliminarfamilia", method = RequestMethod.GET)
+    @ResponseBody
+    public int eliminarFamilia(@RequestParam int idfamilia) {
+        return datosfamiliaService.drop(idfamilia);
+    }
+
+    @RequestMapping(value = "eliminarempleado", method = RequestMethod.GET)
+    @ResponseBody
+    public int eliminarEmpleado(@RequestParam int idempleado) {
+        return empleadoService.drop(idempleado);
+    }
+
+    /*------------------------------*/
+    
+     /*--------------REGISTRO ESCALAFON DOC-------------*/
+    @RequestMapping(value = "agregarescalafon", method = RequestMethod.POST)
+    @ResponseBody
+    public int agregarEscalafon(@RequestBody Escalafon escalafon) {
+        return escalafonService.guardar(escalafon);
+    }
+    
+    /*Listado escalafon doc*/
+    @RequestMapping(value = "listarescalafondoc", method = RequestMethod.GET)
+    @ResponseBody
+    public List<Escalafon> listarEscalafonDoc(@RequestParam int idempleado) {
+        return escalafonService.listarEscalafonPorEmpleado(idempleado);
+    }
     
     
     //listar empleado   

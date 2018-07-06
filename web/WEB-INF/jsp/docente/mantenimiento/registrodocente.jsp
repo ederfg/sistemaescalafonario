@@ -230,7 +230,7 @@
 
             </div> 
 
-            <hr class="mb-4">
+            <hr class="mb-4" color="blue" size=3>
 
             <h4 class="mb-3">DATOS DE VINCULO LABORAL</h4>
 
@@ -390,7 +390,7 @@
                 <p>{{datoslaboral| json}} </p>
             </div>
 
-            <hr class="mb-4">
+            <hr class="mb-4" color="blue" size=3>
             <div class="row">
                 <div class="col-md-12">
                     <h4 class="mb-3">DATOS ACADEMICOS</h4>
@@ -459,7 +459,7 @@
 
 
             <br>
-            <hr class="mb-4">
+            <hr class="mb-4" color="blue" size=3>
             <h4 class="mb-3">DATOS FAMILIARES</h4>
 
             <div class="row">
