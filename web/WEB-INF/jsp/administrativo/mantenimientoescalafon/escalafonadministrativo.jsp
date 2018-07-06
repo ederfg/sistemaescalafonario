@@ -57,8 +57,7 @@
                     <th>Código</th>
                     <th>DNI</th>
                     <th>Administrativo</th>
-                    <th>Opción 1</th>
-                    <th>Opción 2</th>
+                    <th>Mantenimiento Escalafon</th>
 
                 </tr>
             </thead>
@@ -68,8 +67,8 @@
                     <td>{{administrativo.codigoadministrativo}}</td>
                     <td>{{administrativo.empleado.dni}}</td>
                     <td>{{administrativo.empleado.apellidopaterno}} {{administrativo.empleado.apellidomaterno}} {{administrativo.empleado.nombres}}</td>
-                    <td><button class="btn btn-success" ng-click="mostrarModalAgregarEscalafon(administrativo)">Agregar</button></td>
-                    <td><a href="#/administrativo/mantenimientoescalafon/verescalafonadministrativo/{{administrativo.empleado.id}}" class="btn btn-info">ver</a></td>
+                   <!-- <td><button class="btn btn-success" ng-click="mostrarModalAgregarEscalafon(administrativo)">Agregar</button></td>  -->
+                    <td><a href="#/administrativo/mantenimientoescalafon/verescalafonadministrativo/{{administrativo.empleado.id}}" class="btn btn-info">mantemimiento Escalafón</a></td>
                 </tr>
 
             </tbody>

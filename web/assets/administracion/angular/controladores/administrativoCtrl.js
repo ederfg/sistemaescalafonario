@@ -511,8 +511,8 @@ appAdmin.controller('administrativoescalafonCtrl', ['$scope', 'AdministrativoSer
             $("#modalAgregarEscalafon").modal();
             $scope.administrativoc = angular.copy(administrativo);
         };
-        
-        
+
+
 
         $scope.guardarEscalafonAdm = function (empleado, escalafon) {
             escalafon.empleado = empleado;
@@ -540,12 +540,15 @@ appAdmin.controller('administrativoescalafonagregarCtrl', ['$scope', function ($
     }]);
 
 
-appAdmin.controller('administrativoescalafonverCtrl', ['$scope', '$routeParams', 'AdministrativoServ', function ($scope, $routeParams, AdministrativoServ) {
+appAdmin.controller('administrativoescalafonverCtrl', ['$scope', '$routeParams', 'AdministrativoServ', '$timeout', function ($scope, $routeParams, AdministrativoServ, $timeout) {
 
         $scope.idempleado = $routeParams.idempleado;
         $scope.administrativo = {};
 
         $scope.listadoEscalafonAdm = [];
+
+        $scope.escalafondet = {};
+        $scope.escalafonmod = {};
 
         $scope.listarEscalafonAdm = function () {
             AdministrativoServ.listarEscalafonAdm($scope.idempleado).then(function (respuesta) {
@@ -553,6 +556,8 @@ appAdmin.controller('administrativoescalafonverCtrl', ['$scope', '$routeParams',
             });
         };
         $scope.listarEscalafonAdm();
+
+
 
 
 
@@ -573,16 +578,86 @@ appAdmin.controller('administrativoescalafonverCtrl', ['$scope', '$routeParams',
             if (escalafon.empleado !== {}) {
                 AdministrativoServ.guardarEscalafonAdm(escalafon).then(function (respuesta) {
                     //$scope.administrativo = respuesta;
-                    if (respuesta===1) {
+                    if (respuesta === 1) {
                         $("#modalAgregarEscalafon").modal('hide');
                         $scope.listarEscalafonAdm();
                     }
                 });
-                
+
             } else {
                 alert("Empleado no encontrado");
             }
         };
+
+        /*Mostrar Modal det escalafon*/
+        $scope.mostrarModalVerEscalafon = function (escalafon) {
+            $("#modalVerEscalafon").modal();
+            $scope.escalafondet = angular.copy(escalafon);
+        };
+
+        /*Mostrar Modal modificsarl escalafon*/
+        $scope.mostrarModalModificarEscalafon = function (escalafon) {
+            $("#modalModificarEscalafon").modal();
+            $scope.escalafonmod = angular.copy(escalafon);
+            $scope.escalafonmod.delfecha = new Date(escalafon.delfecha);
+            $scope.escalafonmod.alfecha = new Date(escalafon.alfecha);
+            $scope.escalafonmod.fecharesolucion = new Date(escalafon.fecharesolucion);
+        };
+
+        $scope.modificarEscalafonAdm = function (escalafonmod) {
+            AdministrativoServ.modificarEscalafonAdm(escalafonmod).then(function (respuesta) {
+                //$scope.administrativo = respuesta;
+                if (respuesta === 1) {
+                    $("#modalModificarEscalafon").modal('hide');
+                    $scope.listarEscalafonAdm();
+                }
+            });
+        };
+
+        $scope.eliminarEscalafon = function (escalafon) {
+            swal({
+                title: "Estas seguro de eliminar el escalafon?",
+                text: "...",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true
+            })
+                    .then((willDelete) => {
+                        if (willDelete) {
+                            //Eliminando administrativo
+                            function eliminaresc() {
+                                AdministrativoServ.eliminarEscalafonAdm(escalafon).then(function (respuesta) {
+                                    //$scope.administrativo = respuesta;
+                                    if (respuesta === 1) {
+                                         swal("Eliminado correctamente!", {
+                                            icon: "success",
+                                        });
+                                        $scope.listarEscalafonAdm();
+                                        $scope.listarEscalafonAdm();
+                                    }
+                                });
+                            }
+                            ;
+                            eliminaresc();
+
+                            /*  async function addAsync() {
+                             await  $timeout(function () {
+                             eliminaresc();
+                             }, 30);
+                             await  $timeout(function () {
+                             $scope.listarEscalafonAdm();
+                             }, 200);
+                             }
+                             addAsync();*/
+
+                        } else {
+                            swal("Casi elimina el registro!", {
+                            });
+                        }
+                    });
+        };
+
+
 
 
         console.log($scope.idempleado);

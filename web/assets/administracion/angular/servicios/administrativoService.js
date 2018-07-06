@@ -389,6 +389,28 @@ appPersonal.factory('AdministrativoServ', ['$http', '$q', function ($http, $q) {
                             d.resolve(respuesta);
                         });
                 return d.promise;
+            },
+            /*Modificar Escalafon*/
+            modificarEscalafonAdm: function (escalafonmod) {
+                //console.log(administrativo.empleado);
+                var d = $q.defer();
+                $http.post('/sistemaescalafonario/administrativo/modificarescalafon', escalafonmod)
+                        .success(function (respuesta) {
+                            console.log(respuesta);
+                            d.resolve(respuesta);
+                        });
+                return d.promise;
+            },
+            /*Modificar Escalafon*/
+            eliminarEscalafonAdm: function (escalafon) {
+                //console.log(administrativo.empleado);
+                var d = $q.defer();
+                $http.post('/sistemaescalafonario/administrativo/eliminarescalafon',escalafon)
+                        .success(function (respuesta) {
+                            console.log(respuesta);
+                            d.resolve(respuesta);
+                        });
+                return d.promise;
             }
 
 

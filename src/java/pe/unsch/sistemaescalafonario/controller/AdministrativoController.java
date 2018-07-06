@@ -384,6 +384,20 @@ public class AdministrativoController {
         return escalafonService.listarEscalafonPorEmpleado(idempleado);
     }
     
+    /*--------------MODIFICAR ESCALAFON ADM-------------*/
+    @RequestMapping(value = "modificarescalafon", method = RequestMethod.POST)
+    @ResponseBody
+    public int modificarEscalafon(@RequestBody Escalafon escalafon) {
+        return escalafonService.update(escalafon);
+    }
+    
+    /*--------------ELIMINAR ESCALAFON ADM-------------*/
+    @RequestMapping(value = "eliminarescalafon", method = RequestMethod.POST)
+    @ResponseBody
+    public int eliminarEscalafon(@RequestBody Escalafon escalafon) {
+        return escalafonService.drop(escalafon.getId());
+    }
+    
 
 
     //listar empleado   
