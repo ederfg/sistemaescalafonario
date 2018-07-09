@@ -46,11 +46,11 @@
                     <th>Nombres</th>
                     <th>Categoria</th>
                     <th>Régimen</th>
-                    <th>Facultad</th>
+                    <th>N. Remun.</th>
                     <th>Sexo</th>
-                    <th>Opción 1</th>
-                    <th>Opción 2</th>
-                    <th>Opción 3</th>
+                    <th>Opción</th>
+                    <th>Opción</th>
+                    <th>Opción</th>
 
                 </tr>
             </thead>
@@ -62,13 +62,13 @@
                     <td>{{docente.empleado.nombres}}</td>
                     <td>{{docente.categoriadocente}}</td>
                     <td>{{docente.regimendedicacion}}</td>
-                    <td>FCEAC</td>
+                    <td>{{docente.nivelremunerativodoc}}</td>
                     <td>{{docente.empleado.sexo}}</td>
                     <td><a href="#/docente/mantenimiento/modificardocente/{{docente.empleado.id}}" class="btn btn-success">Modificar</a></td>
                     <td>
                         <!-- Button trigger modal -->
                         <button id="agregar" type="button" class="btn btn-info" ng-click="verDetalleDocente(docente.empleado.id)" data-toggle="modal" data-target="#modalDetalleDocente">
-                            Ver
+                            Detalle
                         </button>                  
                     </td>
                     <!-- <td><a href="#/administrativo/mantenimiento/veradministrativo" class="btn btn-info">Ver</a></td> -->
@@ -83,7 +83,7 @@
     </div>
 </main>
 
-<!-- Modal ver docente-->
+<!-- Modal ver detalle docente-->
 <div class="modal fade" id="modalDetalleDocente" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class=" modal-dialog modal-lg" role="document">
         <div class="modal-content">
@@ -99,7 +99,7 @@
             <div class="container">
 
                 <div class="col-md-12 order-md-1">
-                    <h4 class="mb-3">DATOS PERSONALES</h4>
+                    <h4 class="mb-3 text-primary ">DATOS PERSONALES</h4>
                     <table class="table table-sm table-bordered table-striped" border="1">
                         <thead>
                             <tr>
@@ -177,7 +177,7 @@
 
 
                 <div class="col-md-12 order-md-1">
-                    <h4 class="mb-3">DATOS DOCENTE</h4>
+                    <h4 class="mb-3 text-success">DATOS DOCENTE</h4>
                     <table class="table table-sm table-bordered table-striped" border="1">
                         <thead>
                             <tr>
@@ -200,7 +200,7 @@
 
 
                 <div class="col-md-12 order-md-1">
-                    <h4 class="mb-3">DATOS LABORAL</h4>
+                    <h4 class="mb-3 text-warning">DATOS LABORAL</h4>
                     <table class="table table-sm table-bordered table-striped" border="1">
                         <thead>
                             <tr>
@@ -239,7 +239,7 @@
                 </div>
 
                 <div class="col-md-12 order-md-1">
-                    <h4 class="mb-3">DATOS ACADEMICOS</h4>
+                    <h4 class="mb-3 text-danger">DATOS ACADEMICOS</h4>
                     <table class="table table-sm table-bordered table-striped" border="1">
                         <thead>
                             <tr>
@@ -263,7 +263,7 @@
                 </div>
 
                 <div class="col-md-12 order-md-1">
-                    <h4 class="mb-3">GRADOS ACADEMICOS</h4>
+                    <h4 class="mb-3 text-info">GRADOS ACADEMICOS</h4>
                     <table class="table table-sm table-bordered table-striped" border="1">
                         <thead>
                             <tr>
@@ -286,31 +286,9 @@
                     </table>
                 </div>
 
-                <div class="col-md-12 order-md-1">
-                    <h4 class="mb-3">GRADOS ACADEMICOS</h4>
-                    <table class="table table-sm table-bordered table-striped" border="1">
-                        <thead>
-                            <tr>
-                                <th>Grado</th>
-                                <th>Condición</th>
-                                <th>Nombre institucion</th>
-                                <th>Fecha conclusion</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr ng-repeat="gradocademico in listadoGradosAcademicos">
-                                <td>{{gradocademico.grado}}</td>
-                                <td>{{gradocademico.condicion}}</td>
-                                <td>{{gradocademico.nombreinstitucion}}</td>
-                                <td>{{gradocademico.fechaconclusion}}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
 
                 <div class="col-md-12 order-md-1">
-                    <h4 class="mb-3">DATOS FAMILIA</h4>
+                    <h4 class="mb-3 text-secondary">DATOS FAMILIA</h4>
                     <table class="table table-sm table-bordered table-striped" border="1">
                         <thead>
                             <tr>
@@ -347,7 +325,7 @@
                         </tbody>
                     </table>
                     <!--DATOS HIJOS-->
-                    <p>DATOS HIJOS</p>
+                    <p><b>DATOS HIJOS</b></p>
                     <table class="table table-sm table-bordered table-striped" border="1">
                         <thead>
                             <tr>

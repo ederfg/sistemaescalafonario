@@ -247,16 +247,17 @@ public class DocenteController {
     public int actualizarDatosDocente(@RequestBody Docente docente){
         return docenteService.update(docente);
     }
-    //Obtener Datos Laboral
-    @RequestMapping(value = "obtenerdatoslaboral",method = RequestMethod.GET)
+     //Obtener Datos Laboral
+    @RequestMapping(value = "obtenerdatoslaboral", method = RequestMethod.GET)
     @ResponseBody
-    public Datoslaboral obtenerDatosLaboral(@RequestParam int idempleado){
+    public Datoslaboral obtenerDatosLaboral(@RequestParam int idempleado) {
         return datoslaboralService.obtenerDatosLaboralPorIdEmpleado(idempleado);
     }
+
     //Actualizar Datos Laboral
-    @RequestMapping(value = "actualizardatoslaboral",method = RequestMethod.POST)
+    @RequestMapping(value = "actualizardatoslaboral", method = RequestMethod.POST)
     @ResponseBody
-    public int actualizarDatosLaboral(@RequestBody Datoslaboral datoslaboral){
+    public int actualizarDatosLaboral(@RequestBody Datoslaboral datoslaboral) {
         return datoslaboralService.update(datoslaboral);
     }
     //Obtener Datos academicos  
@@ -369,9 +370,21 @@ public class DocenteController {
         return escalafonService.listarEscalafonPorEmpleado(idempleado);
     }
     
+    /*--------------MODIFICAR ESCALAFON Doc-------------*/
+    @RequestMapping(value = "modificarescalafon", method = RequestMethod.POST)
+    @ResponseBody
+    public int modificarEscalafon(@RequestBody Escalafon escalafon) {
+        return escalafonService.update(escalafon);
+    }
+    /*--------------ELIMINAR ESCALAFON Doc-------------*/
+    @RequestMapping(value = "eliminarescalafon", method = RequestMethod.POST)
+    @ResponseBody
+    public int eliminarEscalafon(@RequestBody Escalafon escalafon) {
+        return escalafonService.drop(escalafon.getId());
+    }
     
     //listar empleado   
-     //Guardar adm
+     //Guardar doc
     @RequestMapping(value = "listempleado",method = RequestMethod.GET)
     @ResponseBody
     public List<Empleado> listarEmpleado(){

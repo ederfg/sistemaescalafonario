@@ -223,22 +223,22 @@ appPersonal.factory('DocenteServ', ['$http', '$q', function ($http, $q) {
             },
             obtenerDatosLaboral: function (idempleado) {
                 var d = $q.defer();
-                $http.get('/sistemaescalafonario/docente/obtenerdatoslaboral/?idempleado='+idempleado)
+                $http.get('/sistemaescalafonario/docente/obtenerdatoslaboral/?idempleado=' + idempleado)
                         .success(function (respuesta) {
                             console.log(respuesta);
                             //self.empleados = respuesta;
                             d.resolve(respuesta);
                         });
-                return d.promise;    
+                return d.promise;
             },
             actualizarDatosLaboral: function (datoslaboral) {
                 var d = $q.defer();
-                $http.post('/sistemaescalafonario/docente/actualizardatoslaboral',datoslaboral)
+                $http.post('/sistemaescalafonario/docente/actualizardatoslaboral', datoslaboral)
                         .success(function (respuesta) {
                             console.log(respuesta);
                             d.resolve(respuesta);
                         });
-                return d.promise;    
+                return d.promise;
             },
             obtenerDatosAcademicos: function (idempleado) {
                 var d = $q.defer();
@@ -402,6 +402,28 @@ appPersonal.factory('DocenteServ', ['$http', '$q', function ($http, $q) {
                 //console.log(administrativo.empleado);
                 var d = $q.defer();
                 $http.get('/sistemaescalafonario/docente/listarescalafondoc?idempleado=' + idempleado)
+                        .success(function (respuesta) {
+                            console.log(respuesta);
+                            d.resolve(respuesta);
+                        });
+                return d.promise;
+            },
+            /*Modificar Escalafon*/
+            modificarEscalafonDoc: function (escalafonmod) {
+                //console.log(administrativo.empleado);
+                var d = $q.defer();
+                $http.post('/sistemaescalafonario/docente/modificarescalafon', escalafonmod)
+                        .success(function (respuesta) {
+                            console.log(respuesta);
+                            d.resolve(respuesta);
+                        });
+                return d.promise;
+            },
+            /*Eliminar Escalafon*/
+            eliminarEscalafonDoc: function (escalafon) {
+                //console.log(administrativo.empleado);
+                var d = $q.defer();
+                $http.post('/sistemaescalafonario/docente/eliminarescalafon',escalafon)
                         .success(function (respuesta) {
                             console.log(respuesta);
                             d.resolve(respuesta);

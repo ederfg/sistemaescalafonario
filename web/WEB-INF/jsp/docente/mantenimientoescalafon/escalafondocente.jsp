@@ -42,8 +42,10 @@
                     <th>Código</th>
                     <th>DNI</th>
                     <th>Docente</th>
-                    <th>Opción 1</th>
-                    <th>Opción 2</th>
+                    <th>Nivel Remunerat.</th>
+                    <th>Mantenimiento</th>
+                    
+                    
 
                 </tr>
             </thead>
@@ -53,8 +55,9 @@
                     <td>{{docente.codigodocente}}</td>
                     <td>{{docente.empleado.dni}}</td>
                     <td>{{docente.empleado.apellidopaterno}} {{docente.empleado.apellidomaterno}} {{docente.empleado.nombres}}</td>
-                    <td><button class="btn btn-success" ng-click="mostrarModalAgregarEscalafon(docente)">Agregar</button></td>
-                    <td><a href="#/docente/mantenimientoescalafon/verescalafondocente/{{docente.empleado.id}}" class="btn btn-info">Ver Escalafón</a></td>
+                    <td>{{docente.nivelremunerativodoc}}</td>
+                    <!--<td><button class="btn btn-success" ng-click="mostrarModalAgregarEscalafon(docente)">Agregar</button></td>-->
+                    <td><a href="#/docente/mantenimientoescalafon/verescalafondocente/{{docente.empleado.id}}" class="btn btn-info">Mostrar Escalafón</a></td>
                 </tr>
 
             </tbody>
