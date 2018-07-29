@@ -436,6 +436,7 @@
                                 <th scope="col">Nombre institucion</th>
                                 <th scope="col">Condicion</th>
                                 <th scope="col">Fecha conclusion</th>
+                                <th scope="col">Especialidad</th>
 
                             </tr>
                         </thead>
@@ -445,6 +446,7 @@
                                 <td>{{graacdemico.nombreinstitucion}}</td>
                                 <td>{{graacdemico.condicion}}</td>
                                 <td>{{graacdemico.fechaconclusion| date:"yyyy-MM-dd"}}</td>
+                                <td>{{graacdemico.especialidad}}</td>
                             </tr>
 
                         </tbody>
@@ -732,9 +734,9 @@
                             <input type="int" class="form-control" id="CelularCony" placeholder="Año concluido" ng-model="gradoacademico.fechaconclusion" required>
 
                         </div>
-                        <!--  <div class="col">
-                              <input type="text" class="form-control" id="CelularCony" placeholder="Especialidad" value="" required>
-                          </div> -->
+                          <div class="col">
+                              <input type="text" class="form-control" id="CelularCony" placeholder="Especialidad" ng-model="gradoacademico.especialidad" required>
+                          </div> 
                     </div>
                 </form>
             </div>

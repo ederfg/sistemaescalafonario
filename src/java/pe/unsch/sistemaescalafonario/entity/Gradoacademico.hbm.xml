@@ -24,5 +24,8 @@
     <property name="fechaconclusion" type="java.lang.Integer">
       <column name="fechaconclusion"/>
     </property>
+    <property name="especialidad" type="string">
+      <column length="30" name="especialidad"/>
+    </property>
   </class>
 </hibernate-mapping>

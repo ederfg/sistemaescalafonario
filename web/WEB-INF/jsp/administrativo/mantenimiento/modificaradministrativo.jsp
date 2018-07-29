@@ -542,6 +542,7 @@
                                     <th>Condición</th>
                                     <th>Nombre institucion</th>
                                     <th>Fecha conclusion</th>
+                                    <th>Especialidad</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -564,6 +565,7 @@
                                     </td>
                                     <td><input class="form-control" type="text" ng-model="gradoacademico.nombreinstitucion"></td>
                                     <td><input class="form-control" type="text" ng-model="gradoacademico.fechaconclusion" style="width: 80px"></td>
+                                    <td><input class="form-control" type="text" ng-model="gradoacademico.especialidad"></td>
                                 </tr>
                             </tbody>
                         </table>

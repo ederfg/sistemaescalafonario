@@ -15,8 +15,17 @@ public class Gradoacademico  implements java.io.Serializable {
      private String nombreinstitucion;
      private String condicion;
      private Integer fechaconclusion;
+     private String especialidad;
 
     public Gradoacademico() {
+    }
+
+    public String getEspecialidad() {
+        return especialidad;
+    }
+
+    public void setEspecialidad(String especialidad) {
+        this.especialidad = especialidad;
     }
 
 	

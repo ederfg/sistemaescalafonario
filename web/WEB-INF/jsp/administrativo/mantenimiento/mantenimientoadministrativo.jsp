@@ -275,29 +275,7 @@
                     </table>
                 </div>
 
-                <div class="col-md-12 order-md-1">
-                    <h4 class="mb-3">GRADOS ACADEMICOS</h4>
-                    <table class="table table-sm table-bordered table-striped" border="1">
-                        <thead>
-                            <tr>
-                                <th>Grado</th>
-                                <th>Condición</th>
-                                <th>Nombre institucion</th>
-                                <th>Fecha conclusion</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr ng-repeat="gradocademico in listadoGradosAcademicos">
-                                <td>{{gradocademico.grado}}</td>
-                                <td>{{gradocademico.condicion}}</td>
-                                <td>{{gradocademico.nombreinstitucion}}</td>
-                                <td>{{gradocademico.fechaconclusion}}</td>
-                            </tr>
-                        </tbody>
-
-
-                    </table>
-                </div>
+                
 
                 <div class="col-md-12 order-md-1">
                     <h4 class="mb-3">GRADOS ACADEMICOS</h4>
@@ -308,6 +286,7 @@
                                 <th>Condición</th>
                                 <th>Nombre institucion</th>
                                 <th>Fecha conclusion</th>
+                                <th>Especialidad</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -316,6 +295,7 @@
                                 <td>{{gradocademico.condicion}}</td>
                                 <td>{{gradocademico.nombreinstitucion}}</td>
                                 <td>{{gradocademico.fechaconclusion}}</td>
+                                <td>{{gradocademico.especialidad}}</td>
                             </tr>
                         </tbody>
                     </table>
